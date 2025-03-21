@@ -1,0 +1,31 @@
+Tables:
+User :
+	Pseudo
+	Nom
+	Prénom
+	Mot de passe (crypté)
+	Photo
+	Email
+	Téléphone
+	Notes[]
+	IsAdmin ?
+	Trajets[]
+	Historique[] : Trajets
+	Conducteur
+
+Conducteur
+	User 
+	Voiture
+	Profil vérifié ?
+
+Trajets :
+	Etapes[]
+	Conducteur : Conducteur
+	Passagers[] : User
+
+-----------
+Classes:
+
+Etapes:
+	Lieu : Placemark
+	
