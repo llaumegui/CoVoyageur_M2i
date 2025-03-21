@@ -1,4 +1,3 @@
-Tables:
 User :
 	Pseudo
 	Nom
@@ -10,22 +9,28 @@ User :
 	Notes[]
 	IsAdmin ?
 	Trajets[]
-	Historique[] : Trajets
+	Historique[] : TrajetsId
 	Conducteur
 
-Conducteur
+Conducteur :
 	User 
 	Voiture
 	Profil vérifié ?
 
-Trajets :
+Trajet :
 	Etapes[]
 	Conducteur : Conducteur
 	Passagers[] : User
+	Prix
 
------------
-Classes:
+Etape :
+	Adresse : string (API)
+	Heure
 
-Etapes:
-	Lieu : Placemark
-	
+Review :
+	Commentaire : string
+	Note : int
+
+---
+
+API google maps
