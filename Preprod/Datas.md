@@ -1,35 +1,47 @@
 User :
-	Pseudo
-	Nom
-	Prénom
-	Mot de passe (crypté)
-	Photo
-	Email
-	Téléphone
-	Notes[]
-	IsAdmin ?
-	Trajets[]
-	Historique[] : TrajetsId
-	Conducteur
+	Nom : string
+	Prénom string
+	Mot de passe (crypté) : string
+	Photo : string?
+	Email : string
+	Téléphone : string
+	Review[]? : Review
+	IsAdmin : bool
+	Voyage[]? : Voyage
+	Historique[]? : Voyage
+	IsVerified? : bool
+	Conducteur? : Conducteur
 
 Conducteur :
-	User 
-	Voiture
-	Profil vérifié ?
+	User : User
+	Voiture : Voiture
 
-Trajet :
-	Etapes[]
+Voiture :
+	Modèle : string
+	Capacité : int
+	Couleur : string
+	Volume : float
+	Plaque : string
+	Conducteur : Conducteur
+	
+
+Voyage :
+	IsAvailable : bool
+	Etapes[] : Etapes
 	Conducteur : Conducteur
 	Passagers[] : User
-	Prix
+	Prix : double
+	Durée : TimeSpan
 
 Etape :
 	Adresse : string (API)
-	Heure
+	DateHeure : DateTime
+	Voyage : Voyage
 
 Review :
 	Commentaire : string
 	Note : int
+	UserFrom : User
 
 ---
 
