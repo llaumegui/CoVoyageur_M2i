@@ -1,11 +1,12 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Co_Voyageur.Server.Validators;
+using Microsoft.AspNetCore.Mvc.ViewEngines;
+using System.ComponentModel.DataAnnotations;
+using System.Diagnostics;
 using System.Text.Json.Serialization;
-using Microsoft.AspNet.Identity;
-using Microsoft.AspNetCore.Identity;
 
-namespace Co_Voyageur.Server.Models.Users
+namespace Co_Voyageur.Server.Models
 {
-    public class UserBase
+    public class User
     {
         public int Id { get; set; }
         [Required]
@@ -18,14 +19,17 @@ namespace Co_Voyageur.Server.Models.Users
         [PasswordValidator]
         [JsonIgnore]
         public string? Password { get; set; }
-        public string? Picture {  get; set; }
-        public string? Phone {  get; set; }
-        public Review Review { get; set; }
+        public string? Picture { get; set; }
+        [Required]
+        public string? Phone { get; set; }
+        [Required]
         public bool? IsAdmin { get; set; }
-        public Travel Voyage { get; set; }
-        public Travel Log {  get; set; }
         public bool? IsVerified { get; set; }
-        public Driver Driver { get; set; }
+        public Car Car { get; set; }
 
+        public Review[] Reviews { get; set; }
+
+        public Trip[] Trips { get; set; }
+        public Trip[] TripsHistory { get; set; }
     }
 }
