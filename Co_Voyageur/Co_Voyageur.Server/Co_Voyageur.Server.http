@@ -1,0 +1,6 @@
+@Co_Voyageur.Server_HostAddress = http://localhost:5101
+
+GET {{Co_Voyageur.Server_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
