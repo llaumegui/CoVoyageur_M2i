@@ -1,6 +1,6 @@
 User :
 	Nom : string
-	Prénom string
+	Prénom: string
 	Mot de passe (crypté) : string
 	Photo : string?
 	Email : string
@@ -46,3 +46,9 @@ Review :
 ---
 
 API google maps
+
+
+
+------------------
+
+UML : https://dbdiagram.io/d/CoVoyageurM2i-67ee9f0e4f7afba1843fb309
