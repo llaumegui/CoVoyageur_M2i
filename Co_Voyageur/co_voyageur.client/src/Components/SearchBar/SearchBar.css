@@ -43,7 +43,7 @@ section{
 
 input{
     height: 2rem;
-    width: 10rem;
     opacity: 1;
     font-size: 16px;
+    border-radius: 0.5rem;
 }
