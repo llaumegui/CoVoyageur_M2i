@@ -6,11 +6,11 @@ namespace Co_Voyageur.Server.Models
     {
         public int Id { get; set; }
         [Required]
-        public User? User { get; set; }
+        public User? UserFrom { get; set; }
         [Required]
         public double Price { get; set; }
         [Required]
-        public Step[]? Steps { get; set; }
-        public User[]? Users { get; set; }
+        public List<Step>? Steps { get; set; }
+        public List<User>? Users { get; set; }
     }
 }
