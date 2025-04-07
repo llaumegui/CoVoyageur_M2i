@@ -1,6 +1,7 @@
 using AutoMapper;
 using Co_Voyageur.Server.DTO;
 using Co_Voyageur.Server.DTO.Authentification;
+using Co_Voyageur.Server.Helpers;
 using Co_Voyageur.Server.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -10,9 +11,12 @@ namespace Co_Voyageur.Server.Controllers;
     [ApiController]
     public class AuthenticationController : ControllerBase
     {
-        /* TODO
-         delete when access to DB, won't be an userDTO in DB
-         */
+        // TODO : delete when access to UserService
+        private readonly IMapper _mapper;
+        private Encryptor _encryptor = new();
+        public AuthenticationController(IMapper mapper) { _mapper = mapper; }
+        
+        // TODO : delete when access to DB, won't be an userDTO in DB
         private List<UserDTO> _users =
         [
             new()
@@ -20,7 +24,7 @@ namespace Co_Voyageur.Server.Controllers;
                 FirstName = "John",
                 LastName = "Doe",
                 Email = "johndoe@gmail.com",
-                Password = "123456",
+                Password = Encryptor.EncryptPassword("123456"),
                 IsAdmin = false,
             },
             new()
@@ -28,14 +32,10 @@ namespace Co_Voyageur.Server.Controllers;
                 FirstName = "Jane",
                 LastName = "Doe",
                 Email = "janedoe@gmail.com",
-                Password = "123456",
+                Password = Encryptor.EncryptPassword("123456"),
                 IsAdmin = true,
             }
         ];
-        
-        // TODO : delete when access to UserService
-        private readonly IMapper _mapper;
-        public AuthenticationController(IMapper mapper) { _mapper = mapper; }
 
         // TODO : change to regular user when access to DB
         [HttpGet("users")]
@@ -64,14 +64,11 @@ namespace Co_Voyageur.Server.Controllers;
                 LastName = registerDto.LastName,
                 Email = registerDto.Email,
                 Phone = registerDto.Phone,
-                Password = registerDto.Password!,
+                Password = Encryptor.EncryptPassword(registerDto.Password!),
                 IsAdmin = registerDto.IsAdmin,
             };
             
-            /* TODO
-             Add to DB, check if Save is done else return Bad Request
-             */
-            _users.Add(_mapper.Map<UserDTO>(user));
+            // TODO Add to DB, check if Save is done else return Bad Request
             return Ok(new RegisterResponseDTO { IsSuccessful = true, User = user });
         }
 
@@ -87,11 +84,18 @@ namespace Co_Voyageur.Server.Controllers;
             if (userDto == null)
                 return BadRequest(new LoginResponseDTO { IsSuccessful = false, ErrorMessage = "Invalid Authentication !" });
 
-            // TODO : check with encryption
-            var verified = userDto.Password! == loginDto.Password!;
+            var (verified,needsUpgrade) = _encryptor.Check(userDto.Password!, loginDto.Password!);
 
             if (!verified)
                 return BadRequest(new LoginResponseDTO { IsSuccessful = false, ErrorMessage = "Invalid Authentication !" });
+            
+            if (needsUpgrade)
+            {
+                userDto.Password = Encryptor.EncryptPassword(loginDto.Password!);
+                _users.FirstOrDefault(u=> u == userDto)!.Password = userDto.Password;
+            }
+            
+            // TODO : Add JWT
             
             User user = _mapper.Map<User>(userDto);
             return Ok(new LoginResponseDTO
