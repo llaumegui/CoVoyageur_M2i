@@ -4,7 +4,6 @@ import { useNavigate } from 'react-router-dom';
 const NavBar = () => {
     const navigate = useNavigate();
     const goToLogInPage = () => {
-        console.log("Image clicked, navigating to login page...");
         navigate('/login');
     }
     return (
