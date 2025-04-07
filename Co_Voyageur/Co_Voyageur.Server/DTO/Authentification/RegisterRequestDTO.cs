@@ -14,16 +14,14 @@ public class RegisterRequestDTO
     [StringLength(20, ErrorMessage = "The name must be between 2 and 20 characters.")]
     [RegularExpression(@"^[A-Z][A-Za-z\- ]*$", ErrorMessage = "The name must start with a capital letter and must end with a capital letter.")]
     public string? LastName { get; set; }
-    [Url]
-    public string? Picture { get; set; }
     [Required]
-    [PasswordValidator]
+    //[PasswordValidator]
     public string? Password { get; set; }
     [Required]
-    [EmailAddress]
+    [DataType(DataType.EmailAddress)]
     public string? Email { get; set; }
     [Required]
-    [Phone]
+    [DataType(DataType.PhoneNumber)]
     public string? Phone { get; set; }
     
     public bool? IsAdmin { get; set; }
