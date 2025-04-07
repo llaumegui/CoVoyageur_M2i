@@ -17,3 +17,7 @@ padding: 1.5rem;
     align-items: center;
     gap: 1rem;
 }
+
+.navbar-account{
+    cursor: pointer;
+}
