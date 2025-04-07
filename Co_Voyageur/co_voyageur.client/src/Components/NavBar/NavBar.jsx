@@ -1,13 +1,19 @@
 import React from 'react';
 import './NavBar.css';
-
+import { useNavigate } from 'react-router-dom';
 const NavBar = () => {
+    const navigate = useNavigate();
+    const goToLogInPage = () => {
+        console.log("Image clicked, navigating to login page...");
+        navigate('/login');
+    }
     return (
+
         <nav>
             <img src="../Images/Logo.png" alt="Logo" className="navbar-logo" />
             <div className='navbar-right'>
                 <a href="#">Rechercher</a>
-               <button><img src="../Images/Account.png" alt="Logo" className="navbar-account"/></button> 
+               <img src="../Images/Account.png" alt="Logo" className="navbar-account" onClick={goToLogInPage}/>
             </div>
 
         </nav>
