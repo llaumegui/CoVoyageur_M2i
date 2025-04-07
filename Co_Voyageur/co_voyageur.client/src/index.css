@@ -5,9 +5,11 @@
   --white-text:#FAFAFA;
   --button-color: #284B63;
   --font-site: "Poppins", sans-serif;
+
 }
 body,html{
   margin: 0;
+  font-family: var(--font-site);
 }
 
 a{
