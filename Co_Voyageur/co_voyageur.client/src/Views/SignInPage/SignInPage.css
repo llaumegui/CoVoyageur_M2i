@@ -1,0 +1,11 @@
+form{
+    width: 70vh;
+    height: 70vh;
+}
+
+.signIn-form {
+    background-image: url('/Images/backgroundSignIn.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 90vh;
+}
