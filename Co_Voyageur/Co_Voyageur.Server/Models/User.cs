@@ -25,11 +25,8 @@ namespace Co_Voyageur.Server.Models
         [Required]
         public bool? IsAdmin { get; set; }
         public bool? IsVerified { get; set; }
-        public Car? Car { get; set; }
+        public List<Review> Reviews { get; set; } = [];
 
-        public List<Review>? Reviews { get; set; }
-
-        public List<Trip>? Trips { get; set; }
-        public List<Trip>? TripsHistory { get; set; }
+        public List<Trip> Trips { get; set; } = [];
     }
 }

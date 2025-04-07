@@ -49,30 +49,9 @@ namespace Co_Voyageur.Server.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("UserId")
-                        .IsUnique();
+                    b.HasIndex("UserId");
 
                     b.ToTable("Cars");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Color = "Blanche",
-                            Model = "Citroen Saxo",
-                            PassengerSize = 5,
-                            Plate = "E53C-BX23",
-                            UserId = 0
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Color = "Blanche",
-                            Model = "Fiat Panda",
-                            PassengerSize = 2,
-                            Plate = "VC34-PD42",
-                            UserId = 0
-                        });
                 });
 
             modelBuilder.Entity("Co_Voyageur.Server.Models.Review", b =>
@@ -89,12 +68,12 @@ namespace Co_Voyageur.Server.Migrations
                     b.Property<int>("Rate")
                         .HasColumnType("int");
 
-                    b.Property<int?>("UserFromId")
+                    b.Property<int?>("UserId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("UserFromId");
+                    b.HasIndex("UserId");
 
                     b.ToTable("Reviews");
                 });
@@ -132,15 +111,13 @@ namespace Co_Voyageur.Server.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<int>("DriverId")
+                        .HasColumnType("int");
+
                     b.Property<double>("Price")
                         .HasColumnType("float");
 
-                    b.Property<int>("UserFromId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("UserFromId");
 
                     b.ToTable("Trips");
                 });
@@ -228,8 +205,8 @@ namespace Co_Voyageur.Server.Migrations
             modelBuilder.Entity("Co_Voyageur.Server.Models.Car", b =>
                 {
                     b.HasOne("Co_Voyageur.Server.Models.User", "User")
-                        .WithOne("Car")
-                        .HasForeignKey("Co_Voyageur.Server.Models.Car", "UserId")
+                        .WithMany()
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -238,11 +215,11 @@ namespace Co_Voyageur.Server.Migrations
 
             modelBuilder.Entity("Co_Voyageur.Server.Models.Review", b =>
                 {
-                    b.HasOne("Co_Voyageur.Server.Models.User", "UserFrom")
+                    b.HasOne("Co_Voyageur.Server.Models.User", "User")
                         .WithMany("Reviews")
-                        .HasForeignKey("UserFromId");
+                        .HasForeignKey("UserId");
 
-                    b.Navigation("UserFrom");
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Co_Voyageur.Server.Models.Step", b =>
@@ -254,17 +231,6 @@ namespace Co_Voyageur.Server.Migrations
                         .IsRequired();
 
                     b.Navigation("Trip");
-                });
-
-            modelBuilder.Entity("Co_Voyageur.Server.Models.Trip", b =>
-                {
-                    b.HasOne("Co_Voyageur.Server.Models.User", "UserFrom")
-                        .WithMany("TripsHistory")
-                        .HasForeignKey("UserFromId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("UserFrom");
                 });
 
             modelBuilder.Entity("TripUser", b =>
@@ -289,11 +255,7 @@ namespace Co_Voyageur.Server.Migrations
 
             modelBuilder.Entity("Co_Voyageur.Server.Models.User", b =>
                 {
-                    b.Navigation("Car");
-
                     b.Navigation("Reviews");
-
-                    b.Navigation("TripsHistory");
                 });
 #pragma warning restore 612, 618
         }

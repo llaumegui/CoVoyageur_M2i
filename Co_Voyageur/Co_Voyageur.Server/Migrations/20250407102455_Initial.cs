@@ -14,6 +14,20 @@ namespace Co_Voyageur.Server.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
+                name: "Trips",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    DriverId = table.Column<int>(type: "int", nullable: false),
+                    Price = table.Column<double>(type: "float", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Trips", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Users",
                 columns: table => new
                 {
@@ -31,6 +45,27 @@ namespace Co_Voyageur.Server.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Users", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Steps",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Position = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Date = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    TripId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Steps", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Steps_Trips_TripId",
+                        column: x => x.TripId,
+                        principalTable: "Trips",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -64,57 +99,16 @@ namespace Co_Voyageur.Server.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Comments = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Rate = table.Column<int>(type: "int", nullable: false),
-                    UserFromId = table.Column<int>(type: "int", nullable: true)
+                    UserId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Reviews", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Reviews_Users_UserFromId",
-                        column: x => x.UserFromId,
+                        name: "FK_Reviews_Users_UserId",
+                        column: x => x.UserId,
                         principalTable: "Users",
                         principalColumn: "Id");
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Trips",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    UserFromId = table.Column<int>(type: "int", nullable: false),
-                    Price = table.Column<double>(type: "float", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Trips", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Trips_Users_UserFromId",
-                        column: x => x.UserFromId,
-                        principalTable: "Users",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Steps",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Position = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Date = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    TripId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Steps", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Steps_Trips_TripId",
-                        column: x => x.TripId,
-                        principalTable: "Trips",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -142,15 +136,6 @@ namespace Co_Voyageur.Server.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "Cars",
-                columns: new[] { "Id", "Color", "Model", "PassengerSize", "Plate", "UserId" },
-                values: new object[,]
-                {
-                    { 1, "Blanche", "Citroen Saxo", 5, "E53C-BX23", 0 },
-                    { 2, "Blanche", "Fiat Panda", 2, "VC34-PD42", 0 }
-                });
-
-            migrationBuilder.InsertData(
                 table: "Users",
                 columns: new[] { "Id", "Email", "FirstName", "IsAdmin", "IsVerified", "LastName", "Password", "Phone", "Picture" },
                 values: new object[,]
@@ -162,23 +147,17 @@ namespace Co_Voyageur.Server.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Cars_UserId",
                 table: "Cars",
-                column: "UserId",
-                unique: true);
+                column: "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Reviews_UserFromId",
+                name: "IX_Reviews_UserId",
                 table: "Reviews",
-                column: "UserFromId");
+                column: "UserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Steps_TripId",
                 table: "Steps",
                 column: "TripId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Trips_UserFromId",
-                table: "Trips",
-                column: "UserFromId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_TripUser_UsersId",

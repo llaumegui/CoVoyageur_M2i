@@ -19,27 +19,27 @@ namespace Co_Voyageur.Server.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<User>().HasData(InitialData.users);
-            modelBuilder.Entity<Car>().HasData(InitialData.cars);
+            //modelBuilder.Entity<Car>().HasData(InitialData.cars);
 
-            modelBuilder.Entity<User>()
-            .HasMany(c => c.TripsHistory)
-            .WithOne(r => r.UserFrom)
-            .HasPrincipalKey(c => c.Id);
+            //modelBuilder.Entity<User>()
+            //.HasMany(c => c.TripsHistory)
+            //.WithOne(r => r.UserFrom)
+            //.HasPrincipalKey(c => c.Id);
 
-            modelBuilder.Entity<Car>()
-             .HasOne(c => c.User)
-             .WithOne(c => c.Car);
+            //modelBuilder.Entity<Car>()
+            // .HasOne(c => c.User)
+            // .WithOne(c => c.Car);
 
-            modelBuilder.Entity<Step>()
-             .HasOne(c => c.Trip)
-             .WithMany(r => r.Steps)
-             .HasPrincipalKey(c=>c.Id);
+            //modelBuilder.Entity<Step>()
+            // .HasOne(c => c.Trip)
+            // .WithMany(r => r.Steps)
+            // .HasPrincipalKey(c=>c.Id);
 
 
-            modelBuilder.Entity<Review>()
-             .HasOne(c => c.UserFrom)
-             .WithMany(r => r.Reviews)
-             .HasPrincipalKey(c => c.Id);
+            //modelBuilder.Entity<Review>()
+            // .HasOne(c => c.UserFrom)
+            // .WithMany(r => r.Reviews)
+            // .HasPrincipalKey(c => c.Id);
         }
     }
 }
