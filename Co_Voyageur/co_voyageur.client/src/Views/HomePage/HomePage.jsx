@@ -7,7 +7,7 @@ const HomePage = () => {
     
     return (
         <>
-            <NavBar></NavBar>
+            <NavBar ></NavBar>
             <img src="\Images\CoVoyagerImageBackground01.jpg" alt="ImageBackground" className="background-image-home"/>
             <SearchBar></SearchBar>
         </>
