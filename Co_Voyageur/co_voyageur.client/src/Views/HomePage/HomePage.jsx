@@ -1,7 +1,9 @@
 import React from 'react';
-import NavBar from '../../Components/NavBar/NavBar';
+import NavBar from '../../components/NavBar/NavBar';
 import './HomePage.css';
-import SearchBar from '../../Components/SearchBar/SearchBar';
+import SearchBar from '../../components/SearchBar/SearchBar';
+import Card from '../../components/Card/Card';
+import Footer from '../../components/Footer/Footer';
 
 const HomePage = () => {
     
@@ -10,6 +12,13 @@ const HomePage = () => {
             <NavBar></NavBar>
             <img src="\Images\CoVoyagerImageBackground01.jpg" alt="ImageBackground" className="background-image-home"/>
             <SearchBar></SearchBar>
+            <div className='container'>
+            <Card />
+            <Card />
+            <Card />
+            </div>
+            <Footer/>
+            
         </>
     );
 };
