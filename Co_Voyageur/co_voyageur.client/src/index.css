@@ -4,9 +4,12 @@
   --background-nav: #3C6E71;
   --white-text:#FAFAFA;
   --button-color: #284B63;
+  --button-hover-color: #3D7398;
+  --font-color: #353535;
   --font-site: "Poppins", sans-serif;
-
+  
 }
+
 body,html{
   margin: 0;
   font-family: var(--font-site);
@@ -17,4 +20,13 @@ a{
   color: var(--white-text);
   font-size: 24px;
   font-family: var(--font-site);
+}
+
+h1,h2,h3,h4,h5,h6{
+  font-family: var(--font-site);
+  color: var(--font-color);
+}
+
+h2{
+  font-weight: 400;
 }

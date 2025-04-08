@@ -28,7 +28,7 @@ section{
         transition: all 0.2s ease-in-out;
     }
     >button:hover{
-        background-color: #3D7398;
+        background-color: var(--button-hover-color);
         cursor: pointer;
     }
     >button:active{
