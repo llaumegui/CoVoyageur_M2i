@@ -1,6 +1,7 @@
 using Co_Voyageur.Server.Data;
 using Co_Voyageur.Server.Repositories;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,7 +10,14 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(c =>
+{
+    c.SwaggerDoc("v1", new OpenApiInfo
+    {
+        Title = "Co_Voyageur.Server",
+        Version = "3.0.0", // Cela définit explicitement la version OpenAPI 3.0.0
+    });
+});
 
 
 builder.Services.AddDbContext<AppDbContext>(options =>
@@ -29,7 +37,11 @@ app.UseStaticFiles();
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
-    app.UseSwaggerUI();
+    app.UseSwaggerUI(c =>
+    {
+        c.SwaggerEndpoint("/swagger/v1/swagger.json", "Mon API v1");
+        c.RoutePrefix = "swagger"; // Swagger dispo sur /swagger
+    });
 }
 
 app.UseHttpsRedirection();

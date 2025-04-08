@@ -1,6 +1,6 @@
 ﻿namespace Co_Voyageur.Server.Repositories
 {
-    public interface ICar<T, Tid> where T : new ()
+    public interface IReviewRepository<T, Tid> where T : new()
     {
         T? Add(T item);
         T? GetById(Tid id);

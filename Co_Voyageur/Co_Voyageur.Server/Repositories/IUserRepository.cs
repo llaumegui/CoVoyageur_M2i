@@ -1,6 +1,6 @@
 ﻿namespace Co_Voyageur.Server.Repositories
 {
-    public interface IStep<T, Tid> where T : new()
+    public interface IUserRepository<T, Tid> where T : new()
     {
         T? Add(T item);
         T? GetById(Tid id);

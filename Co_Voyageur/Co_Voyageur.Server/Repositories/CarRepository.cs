@@ -2,7 +2,7 @@
 
 namespace Co_Voyageur.Server.Repositories
 {
-    public class CarRepository : ICar<Car, int>
+    public class CarRepository : ICarRepository<Car, int>
     {
         public Car? Add(Car item)
         {

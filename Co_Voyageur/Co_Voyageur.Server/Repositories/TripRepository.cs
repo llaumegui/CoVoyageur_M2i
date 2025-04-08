@@ -2,7 +2,7 @@
 
 namespace Co_Voyageur.Server.Repositories
 {
-    public class TripRepository : ITrip<Trip, int>
+    public class TripRepository : ITripRepository<Trip, int>
     {
         public Trip? Add(Trip item)
         {

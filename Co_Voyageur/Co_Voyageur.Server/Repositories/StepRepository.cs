@@ -2,7 +2,7 @@
 
 namespace Co_Voyageur.Server.Repositories
 {
-    public class StepRepository : IStep<Step, int>
+    public class StepRepository : IStepRepository<Step, int>
     {
         public Step? Add(Step item)
         {

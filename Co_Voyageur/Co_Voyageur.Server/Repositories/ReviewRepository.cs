@@ -2,7 +2,7 @@
 
 namespace Co_Voyageur.Server.Repositories
 {
-    public class ReviewRepository : IReview<Review, int>
+    public class ReviewRepository : IReviewRepository<Review, int>
     {
         public Review? Add(Review item)
         {
