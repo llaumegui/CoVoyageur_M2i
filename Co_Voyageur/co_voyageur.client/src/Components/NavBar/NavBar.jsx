@@ -15,6 +15,7 @@ const NavBar = () => {
         <nav>
             <img src="../Images/Logo.png" alt="Logo" className="navbar-logo" onClick={goToHomePage} />
             <div className='navbar-right'>
+                <a href="/submit-travel">Proposer un trajet</a>
                 <a href="/search">Rechercher</a>
                <img src="../Images/Account.png" alt="Logo" className="navbar-account" onClick={goToLogInPage}/>
             </div>

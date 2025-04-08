@@ -7,6 +7,7 @@ import SignInPage from './Views/SignInPage/SignInPage.jsx';
 import SearchPage from './Views/SearchPage/SearchPage.jsx';
 import ProfilePage from './Views/ProfilePage/ProfilePage.jsx';
 import SearchTravelsPage from './Views/SearchTravelsPage/SearchTravelsPage.jsx';
+import SubmitTravelPage from './Views/SubmitTravelPage/SubmitTravelPage.jsx';
 createRoot(document.getElementById('root')).render(
   <Router>
             <Routes>
@@ -16,6 +17,7 @@ createRoot(document.getElementById('root')).render(
                 <Route path="/search" element={<SearchPage />} />
                 <Route path="/profile" element={<ProfilePage />} />
                 <Route path="/search/travels" element={<SearchTravelsPage/>} />
+                <Route path="/submit-travel" element={<SubmitTravelPage/>}/>
                 {/* <Route path="/profile/:id" element={<ProfilePage />} /> ROUTE DE L'UTILISATEUR PAR SON ID*/}
             </Routes>
   </Router>
