@@ -8,6 +8,7 @@ import SearchPage from './Views/SearchPage/SearchPage.jsx';
 import ProfilePage from './Views/ProfilePage/ProfilePage.jsx';
 import SearchTravelsPage from './Views/SearchTravelsPage/SearchTravelsPage.jsx';
 import SubmitTravelPage from './Views/SubmitTravelPage/SubmitTravelPage.jsx';
+import NotFoundPage from './Views/404Page/404Page.jsx';
 createRoot(document.getElementById('root')).render(
   <Router>
             <Routes>
@@ -18,6 +19,7 @@ createRoot(document.getElementById('root')).render(
                 <Route path="/profile" element={<ProfilePage />} />
                 <Route path="/search/travels" element={<SearchTravelsPage/>} />
                 <Route path="/submit-travel" element={<SubmitTravelPage/>}/>
+                <Route path="*" element={<NotFoundPage />} />
                 {/* <Route path="/profile/:id" element={<ProfilePage />} /> ROUTE DE L'UTILISATEUR PAR SON ID*/}
             </Routes>
   </Router>
