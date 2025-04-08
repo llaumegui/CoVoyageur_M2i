@@ -1,0 +1,46 @@
+.filters{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: 1fr 1fr 0.2fr 1fr 0.2fr 1fr 1fr;
+    width: 20%;
+    margin: 2rem 2rem;
+    align-items: center;
+}
+
+.reset-button{
+    background-color: var(--button-color);
+    color: var(--white-text);
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 16px;
+    font-family: var(--font-site);
+    transition: 0.3s;
+    border-radius: 1rem;
+    width: 70%;
+    height: 70%;
+}
+
+.reset-button:hover{
+    background-color: var(--button-hover-color);
+    scale: 1.1;
+}
+
+.filter-title{
+    grid-column: span 2;
+}
+
+.reset-button{
+    grid-column: span 2;
+    justify-self: center;
+}
+
+hr{
+    grid-column: span 2;
+    width: 80%;
+    color: rgba(0, 0, 0, 0.225);
+}
+
+.input-radio{
+    width: 20%;
+}

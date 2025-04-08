@@ -1,17 +1,18 @@
 import React from 'react';
 import NavBar from '../../Components/NavBar/NavBar';
-import './LogInPage.css';
+import './SignInPage.css';
 const LogInPage = () => {
     return (
         <>
         <NavBar></NavBar>
-        <section className='login-form'>
+        <section className='signIn-form'>
                 <form action="">
-                    <h1>Se connecter</h1>
+                    <h1>Inscription</h1>
                     <input type="text" placeholder='E mail'/>
                     <input type="password" placeholder='Mot de passe'/>
-                    <button>Se connecter</button>
-                    <a href='/signup'>Pas encore de compte? Inscrivez vous!</a>
+                    <input type="password" placeholder='Confirmer le mot de passe' />
+                    <button>Inscription</button>
+                    <a href='/login'>Déjà incrit? Connectez vous!</a>
                 </form>
             </section>
         </>

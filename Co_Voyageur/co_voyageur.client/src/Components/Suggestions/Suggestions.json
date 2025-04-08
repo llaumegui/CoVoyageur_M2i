@@ -1,0 +1,21 @@
+[
+    { "id": 1, "name": "Paris" },
+    { "id": 2, "name": "Marseille" },
+    { "id": 3, "name": "Lille" },
+    { "id": 4, "name": "Lyon" },
+    { "id": 5, "name": "Toulouse" },
+    { "id": 6, "name": "Nice" },
+    { "id": 7, "name": "Nantes" },
+    { "id": 8, "name": "Strasbourg" },
+    { "id": 9, "name": "Montpellier" },
+    { "id": 10, "name": "Bordeaux" },
+    { "id": 11, "name": "Rennes" },
+    { "id": 12, "name": "Reims" },
+    { "id": 13, "name": "Le Havre" },
+    { "id": 14, "name": "Saint-Étienne" },
+    { "id": 15, "name": "Toulon" },
+    { "id": 16, "name": "Aix-en-Provence" },
+    { "id": 17, "name": "Angers" },
+    { "id": 18, "name": "Clermont-Ferrand" },
+    { "id": 19, "name": "Dijon" }
+]

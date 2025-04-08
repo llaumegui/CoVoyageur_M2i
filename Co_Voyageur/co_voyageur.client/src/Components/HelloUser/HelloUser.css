@@ -1,0 +1,15 @@
+p{
+    text-align: center;
+    font-size: 2rem;
+}
+.random-image{
+    border-radius: 50rem;
+}
+
+.hello-user{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 3rem;
+    gap: 2rem;
+}
