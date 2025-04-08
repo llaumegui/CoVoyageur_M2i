@@ -2,6 +2,7 @@ using Co_Voyageur.Server.Data;
 using Co_Voyageur.Server.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
+using Co_Voyageur.Server.Helpers;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -27,6 +28,10 @@ builder.Services.AddScoped<ReviewRepository>();
 builder.Services.AddScoped<StepRepository>();
 builder.Services.AddScoped<TripRepository>();
 builder.Services.AddScoped<UserRepository>();
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
+builder.Services.Configure<AppSettings>(builder.Configuration.GetSection("AppSettings"));
+
 var app = builder.Build();
 
 

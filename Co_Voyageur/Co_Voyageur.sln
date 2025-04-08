@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Co_Voyageur.Server", "Co_Vo
 EndProject
 Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "co_voyageur.client", "co_voyageur.client\co_voyageur.client.esproj", "{E3E57311-3FB3-4DA5-AB3F-84057BBACA36}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Co_Voyageur.Tests", "Co_Voyageur.Tests\Co_Voyageur.Tests.csproj", "{8612F881-10B6-4408-B1D2-6310D06CA31C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,6 +25,10 @@ Global
 		{E3E57311-3FB3-4DA5-AB3F-84057BBACA36}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E3E57311-3FB3-4DA5-AB3F-84057BBACA36}.Release|Any CPU.Build.0 = Release|Any CPU
 		{E3E57311-3FB3-4DA5-AB3F-84057BBACA36}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{8612F881-10B6-4408-B1D2-6310D06CA31C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8612F881-10B6-4408-B1D2-6310D06CA31C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8612F881-10B6-4408-B1D2-6310D06CA31C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8612F881-10B6-4408-B1D2-6310D06CA31C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
