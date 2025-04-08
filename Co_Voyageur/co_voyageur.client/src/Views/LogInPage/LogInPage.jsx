@@ -7,10 +7,10 @@ const LogInPage = () => {
         <NavBar></NavBar>
         <section className='login-form'>
                 <form action="">
-                    <h1>Log In</h1>
-                    <input type="text" placeholder='Username'/>
-                    <input type="password" placeholder='Password'/>
-                    <button>Log In</button>
+                    <h1>Se connecter</h1>
+                    <input type="text" placeholder='E mail'/>
+                    <input type="password" placeholder='Mot de passe'/>
+                    <button>Se connecter</button>
                     <a href='/signup'>Pas encore de compte? Inscrivez vous!</a>
                 </form>
             </section>

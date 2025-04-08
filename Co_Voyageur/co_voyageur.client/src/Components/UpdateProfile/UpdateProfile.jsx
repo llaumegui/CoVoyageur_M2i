@@ -8,10 +8,10 @@ const UpdateProfile = () => {
     <div className='update-profile'>
         <span>Email:</span>
         <span>{email}</span>
-        <button>Modifier</button>
-        <span>Password:</span>
+        <button className="update-button">Modifier</button>
+        <span>Mot de passe:</span>
         <span>{password}</span>
-        <button>Modifier</button>
+        <button className="update-button">Modifier</button>
     </div>
     </>
     );

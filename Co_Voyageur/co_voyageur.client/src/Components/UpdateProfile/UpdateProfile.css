@@ -9,11 +9,16 @@
     border: 0.1rem solid black;
     padding: 2rem;
     border-radius: 1rem;
-    >button{
+    >.update-button{
         border: none;
         background: none;
         cursor: pointer;
         color: red;
         width: fit-content;
+        transition: all 0.3s ease-in-out;
+    }
+    >.update-button:hover{
+        text-decoration: underline;
+        scale: 1.1;
     }
 }
