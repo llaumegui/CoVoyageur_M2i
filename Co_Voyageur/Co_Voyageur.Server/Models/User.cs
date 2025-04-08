@@ -23,14 +23,10 @@ namespace Co_Voyageur.Server.Models
         [Required]
         public string? Phone { get; set; }
         [Required]
-        public bool? IsAdmin { get; set; }
-        public bool? IsVerified { get; set; }
-        public List<Review> Reviews { get; set; } = [];
-
-        public List<Trip> Trips { get; set; } = [];
         public bool IsAdmin { get; set; }
         public bool IsVerified { get; set; }
-        
+        public List<Review> Reviews { get; set; } = [];
+        public List<Trip> Trips { get; set; } = [];
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
         public int? CreatedBy { get; set; }
     }
