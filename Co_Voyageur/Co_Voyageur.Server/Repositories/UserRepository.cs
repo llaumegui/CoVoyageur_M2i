@@ -1,4 +1,5 @@
-﻿using Co_Voyageur.Server.Data;
+﻿using System.Linq.Expressions;
+using Co_Voyageur.Server.Data;
 using Co_Voyageur.Server.Models;
 
 namespace Co_Voyageur.Server.Repositories
@@ -12,27 +13,28 @@ namespace Co_Voyageur.Server.Repositories
         {
             _appDbContext = appDbContext;
         }
-        public User? Add(User item)
+
+        public async Task<User?> Add(User item)
         {
             throw new NotImplementedException();
         }
-
-        public bool Delete(int id)
+        public async Task<User?> GetById(int id)
         {
             throw new NotImplementedException();
         }
-
-        public IEnumerable<User> GetAll()
-        {
-            return _appDbContext.Users;
-        }
-
-        public User? GetById(int id)
+        public async Task<User?> GetByPredicate(Expression<Func<User, bool>> predicate)
         {
             throw new NotImplementedException();
         }
-
-        public User? Update(int id, User item)
+        public async Task<IEnumerable<User>> GetAll()
+        {
+            throw new NotImplementedException();
+        }
+        public async Task<User?> Update(int id, User item)
+        {
+            throw new NotImplementedException();
+        }
+        public async Task<bool> Delete(int id)
         {
             throw new NotImplementedException();
         }

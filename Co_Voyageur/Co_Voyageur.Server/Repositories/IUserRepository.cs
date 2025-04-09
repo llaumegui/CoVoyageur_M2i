@@ -1,11 +1,14 @@
-﻿namespace Co_Voyageur.Server.Repositories
+﻿using System.Linq.Expressions;
+
+namespace Co_Voyageur.Server.Repositories
 {
     public interface IUserRepository<T, Tid> where T : new()
     {
-        T? Add(T item);
-        T? GetById(Tid id);
-        IEnumerable<T> GetAll();
-        T? Update(Tid id, T item);
-        bool Delete(Tid id);
+        Task<T?> Add(T item);
+        Task<T?> GetById(Tid id);
+        Task<T?> GetByPredicate(Expression<Func<T, bool>> predicate);
+        Task<IEnumerable<T>> GetAll();
+        Task<T?> Update(Tid id, T item);
+        Task<bool> Delete(Tid id);
     }
 }

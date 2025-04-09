@@ -8,8 +8,8 @@ public class Encryptor
     private const int KeySize = 32;
     private const int Iterations = 100;
 
-    // TODO : remove static when access to DB
-    public static string EncryptPassword(string password)
+    
+    public string EncryptPassword(string password)
     {
         using (var algorithm = new Rfc2898DeriveBytes(
                    password,
