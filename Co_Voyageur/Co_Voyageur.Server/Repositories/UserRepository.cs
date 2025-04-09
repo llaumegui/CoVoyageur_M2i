@@ -26,9 +26,9 @@ namespace Co_Voyageur.Server.Repositories
         {
             throw new NotImplementedException();
         }
-        public async Task<IEnumerable<User>> GetAll()
+        public Task<IEnumerable<User>> GetAll()
         {
-            throw new NotImplementedException();
+            return Task.FromResult<IEnumerable<User>>(_appDbContext.Users);
         }
         public async Task<User?> Update(int id, User item)
         {

@@ -7,13 +7,14 @@ namespace Co_Voyageur.Server.Data
     public class AppDbContext : DbContext
     {
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
+        public AppDbContext(){}
+        
+        public virtual DbSet<Car> Cars  { get; set; }
+        public virtual DbSet<Review> Reviews { get; set; }
+        public virtual DbSet<Step> Steps { get; set; }
+        public virtual DbSet<Trip> Trips { get; set; }
 
-        public DbSet<Car> Cars  { get; set; }
-        public DbSet<Review> Reviews { get; set; }
-        public DbSet<Step> Steps { get; set; }
-        public DbSet<Trip> Trips { get; set; }
-
-        public DbSet<User> Users { get; set; }
+        public virtual DbSet<User> Users { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
