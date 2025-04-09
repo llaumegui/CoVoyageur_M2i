@@ -5,8 +5,7 @@ const HelloUser = () => {
     return (
         <>
         <div className='hello-user'>
-            <p>Hello {username}</p>
-            <img src="https://picsum.photos/50" alt="randompic" className='random-image' />
+            <p className="hello">Hello {username}</p>
         </div>
             
         </>

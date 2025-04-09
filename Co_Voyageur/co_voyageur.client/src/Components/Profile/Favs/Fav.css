@@ -1,0 +1,37 @@
+.fav{
+    border: 0.1rem solid black;
+    padding: 1rem;
+    border-radius: 1rem;
+    background: none;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+.fav:hover{
+    background-color: var(--button-color);
+    border-color:var(--button-color);
+    color: var(--white-text);
+    scale: 1.05;
+}
+
+.remove-fav{
+    background:none;
+    border:none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.remove-fav:hover{
+    scale: 1.1;
+}
+
+.remove-fav:active{
+    scale: 1;
+}
+
+.fav-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    margin: 1rem 0;
+}

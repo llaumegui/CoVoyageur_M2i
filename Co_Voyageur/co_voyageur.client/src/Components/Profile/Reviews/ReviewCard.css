@@ -1,0 +1,21 @@
+.review-card{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 1rem;
+    padding: 1rem 2rem;
+    box-shadow: 0 0 0.5rem var(--font-color);
+    border-radius: 1rem;
+    justify-items: center;
+    align-items: center;
+    margin: 1rem;
+}
+
+.notation{
+    grid-column: span 2;
+}
+
+.profile-image{
+    width: 100%;
+    border-radius: 1rem;
+}
