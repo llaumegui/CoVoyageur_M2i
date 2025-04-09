@@ -1,11 +1,12 @@
 import React, {useState} from 'react';
 import NavBar from '../../Components/NavBar/NavBar';
 import './SignInPage.css';
-const LogInPage = () => {
+const SignInPage = () => {
     const [error, setError] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
+    const [displayForm, setDisplayForm] = useState(true);
 
     const emailChange = (e) => {
         setEmail(e.target.value);
@@ -19,7 +20,8 @@ const LogInPage = () => {
         setConfirmPassword(e.target.value);
     }
 
-    const handleSubmit = () => {
+    const handleSubmit = (e) => {
+        e.preventDefault();
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // Regex pour valider l'email
         const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/; // Minimum 8 caractères avec au moins une lettre et un chiffre
 
@@ -40,25 +42,44 @@ const LogInPage = () => {
             return;
         }
         setError('');
-        
+        setDisplayForm(false);
     }
 
     return (
-        <>
+    <>
         <NavBar></NavBar>
-        <section className='signIn-form'>
-                <form action={handleSubmit} >
-                    <h1>Inscription</h1>
-                    <input type="text" placeholder='E mail' value={email} onChange={emailChange}/>
-                    <input type="password" placeholder='Mot de passe' value={password} onChange={passwordChange}/>
-                    <input type="password" placeholder='Confirmer le mot de passe' value={confirmPassword} onChange={confirmPasswordChange} />
-                    <button>Inscription</button>
-                    {error && <p className="error">{error}</p>}
-                    <a href='/login'>Déjà incrit? Connectez vous!</a>
-                </form>
-            </section>
-        </>
-    );
-};
+        <section>
+                <form className='form-style'>
+                    {displayForm && 
 
-export default LogInPage;
+                    <div>
+                        <h1>Inscription</h1>
+                        <input type="text" placeholder='E mail' value={email} onChange={emailChange}/>
+                        <input type="password" placeholder='Mot de passe' value={password} onChange={passwordChange}/>
+                        <input type="password" placeholder='Confirmer le mot de passe' value={confirmPassword} onChange={confirmPasswordChange} />
+                        <button onClick={handleSubmit} className='button-submit-style'>Suivant</button>
+                        {error && <p className="error">{error}</p>}
+                        <a href='/login'>Déjà incrit? Connectez vous!</a>
+                    </div>
+
+                    }
+                    {!displayForm &&
+
+                    <div>
+                        <h1>Suite de l'inscription</h1>
+                        <input type="text" placeholder='Nom' required/>
+                        <input type="text" placeholder='Prénom' required/>
+                        <input type="text" placeholder='Téléphone' required/>
+                        <button type='submit' className='button-submit-style'>S'inscrire</button>
+                    </div>
+                    
+
+                    }
+                    
+                </form>
+        </section>
+    </>
+        )
+    };
+
+export default SignInPage;

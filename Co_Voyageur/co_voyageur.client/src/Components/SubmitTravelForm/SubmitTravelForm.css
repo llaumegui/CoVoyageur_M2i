@@ -4,7 +4,7 @@
     justify-content: center;
     align-items: center;
     grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: repeat(6, 1fr);
+    grid-template-rows: repeat(2, 1fr);
     padding: 3rem;
     box-shadow: none;
     backdrop-filter: none;
@@ -27,5 +27,3 @@
 .input-travel-form{
     box-shadow: 0 0px 10px rgba(0, 0, 0, 0.407);
 }
-
-
