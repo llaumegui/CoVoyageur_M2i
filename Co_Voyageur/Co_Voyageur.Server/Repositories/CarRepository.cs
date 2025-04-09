@@ -1,30 +1,31 @@
-﻿using Co_Voyageur.Server.Models;
+﻿using System.Linq.Expressions;
+using Co_Voyageur.Server.Models;
 
 namespace Co_Voyageur.Server.Repositories
 {
-    public class CarRepository : ICarRepository<Car, int>
+    public class CarRepository : IRepository<Car, int>
     {
-        public Car? Add(Car item)
+        public Task<Car?> Add(Car item)
         {
             throw new NotImplementedException();
         }
-
-        public bool Delete(int id)
+        public Task<Car?> GetById(int id)
         {
             throw new NotImplementedException();
         }
-
-        public IEnumerable<Car> GetAll()
+        public Task<Car?> GetByPredicate(Expression<Func<Car, bool>> predicate)
         {
             throw new NotImplementedException();
         }
-
-        public Car? GetById(int id)
+        public Task<IEnumerable<Car>> GetAll()
         {
             throw new NotImplementedException();
         }
-
-        public Car? Update(int id, Car item)
+        public Task<Car?> Update(int id, Car item)
+        {
+            throw new NotImplementedException();
+        }
+        public Task<bool> Delete(int id)
         {
             throw new NotImplementedException();
         }

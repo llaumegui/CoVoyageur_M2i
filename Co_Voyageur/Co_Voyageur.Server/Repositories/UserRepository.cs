@@ -4,7 +4,7 @@ using Co_Voyageur.Server.Models;
 
 namespace Co_Voyageur.Server.Repositories
 {
-    public class UserRepository : IUserRepository<User, int>
+    public class UserRepository : IRepository<User, int>
     {
 
         private readonly AppDbContext _appDbContext;

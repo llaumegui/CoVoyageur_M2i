@@ -1,30 +1,31 @@
-﻿using Co_Voyageur.Server.Models;
+﻿using System.Linq.Expressions;
+using Co_Voyageur.Server.Models;
 
 namespace Co_Voyageur.Server.Repositories
 {
-    public class TripRepository : ITripRepository<Trip, int>
+    public class TripRepository : IRepository<Trip, int>
     {
-        public Trip? Add(Trip item)
+        public Task<Trip?> Add(Trip item)
         {
             throw new NotImplementedException();
         }
-
-        public bool Delete(int id)
+        public Task<Trip?> GetById(int id)
         {
             throw new NotImplementedException();
         }
-
-        public IEnumerable<Trip> GetAll()
+        public Task<Trip?> GetByPredicate(Expression<Func<Trip, bool>> predicate)
         {
             throw new NotImplementedException();
         }
-
-        public Trip? GetById(int id)
+        public Task<IEnumerable<Trip>> GetAll()
         {
             throw new NotImplementedException();
         }
-
-        public Trip? Update(int id, Trip item)
+        public Task<Trip?> Update(int id, Trip item)
+        {
+            throw new NotImplementedException();
+        }
+        public Task<bool> Delete(int id)
         {
             throw new NotImplementedException();
         }

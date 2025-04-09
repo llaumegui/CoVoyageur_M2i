@@ -16,7 +16,7 @@ builder.Services.AddSwaggerGen(c =>
     c.SwaggerDoc("v1", new OpenApiInfo
     {
         Title = "Co_Voyageur.Server",
-        Version = "3.0.0", // Cela définit explicitement la version OpenAPI 3.0.0
+        Version = "3.0.0", // Cela dï¿½finit explicitement la version OpenAPI 3.0.0
     });
 });
 

@@ -30,7 +30,7 @@ namespace Co_Voyageur.Server.Controllers
             return Ok(clients);
         }
 
-        #region Authentification
+        #region Authentification_and_Create
                 
         [HttpPost("register")]
         [ProducesResponseType(StatusCodes.Status201Created)]

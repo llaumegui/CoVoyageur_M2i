@@ -1,30 +1,31 @@
-﻿using Co_Voyageur.Server.Models;
+﻿using System.Linq.Expressions;
+using Co_Voyageur.Server.Models;
 
 namespace Co_Voyageur.Server.Repositories
 {
-    public class StepRepository : IStepRepository<Step, int>
+    public class StepRepository : IRepository<Step, int>
     {
-        public Step? Add(Step item)
+        public Task<Step?> Add(Step item)
         {
             throw new NotImplementedException();
         }
-
-        public bool Delete(int id)
+        public Task<Step?> GetById(int id)
         {
             throw new NotImplementedException();
         }
-
-        public IEnumerable<Step> GetAll()
+        public Task<Step?> GetByPredicate(Expression<Func<Step, bool>> predicate)
         {
             throw new NotImplementedException();
         }
-
-        public Step? GetById(int id)
+        public Task<IEnumerable<Step>> GetAll()
         {
             throw new NotImplementedException();
         }
-
-        public Step? Update(int id, Step item)
+        public Task<Step?> Update(int id, Step item)
+        {
+            throw new NotImplementedException();
+        }
+        public Task<bool> Delete(int id)
         {
             throw new NotImplementedException();
         }

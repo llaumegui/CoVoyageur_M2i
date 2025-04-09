@@ -2,7 +2,7 @@
 
 namespace Co_Voyageur.Server.Repositories
 {
-    public interface IUserRepository<T, Tid> where T : new()
+    public interface IRepository<T, Tid> where T : new()
     {
         Task<T?> Add(T item);
         Task<T?> GetById(Tid id);
