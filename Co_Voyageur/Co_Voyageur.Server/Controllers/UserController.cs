@@ -13,7 +13,7 @@ using Swashbuckle.AspNetCore.Annotations;
 
 namespace Co_Voyageur.Server.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/user")]
     [ApiController]
     public class UserController : ControllerBase
     {
@@ -26,8 +26,8 @@ namespace Co_Voyageur.Server.Controllers
         [ProducesResponseType(typeof(IEnumerable<User>), StatusCodes.Status200OK)]
         public async Task<IActionResult> Get()
         {
-            var clients = await _userService.GetAll();
-            return Ok(clients);
+            var users = await _userService.GetAll();
+            return Ok(users);
         }
         
         [HttpGet("{id}")]
@@ -40,14 +40,14 @@ namespace Co_Voyageur.Server.Controllers
             return user != null ? Ok(user) : NotFound($"User avec l'id {id} non trouvé.");
         }
         
-        [HttpGet("email/{email}")]
+        [HttpGet("{email}")]
         [SwaggerOperation(Summary = "Obtenir un contact par email")]
         [ProducesResponseType(typeof(User), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(string), StatusCodes.Status404NotFound)]
         public async Task<IActionResult> GetByEmail(string email)
         {
-            var contact = await _userService.GetByEmail(email);
-            return contact != null ? Ok(contact) : NotFound($"User avec le mail \"{email}\" non trouvé.");
+            var user = await _userService.GetByEmail(email);
+            return user != null ? Ok(user) : NotFound($"User avec le mail \"{email}\" non trouvé.");
         }
         
         // POST /user
@@ -59,10 +59,10 @@ namespace Co_Voyageur.Server.Controllers
         {
             try
             {
-                var newContact = await _userService.Create(user);
+                var newUser = await _userService.Create(user);
                 return CreatedAtAction(nameof(GetById), 
-                    new { id = newContact.Id }, 
-                    newContact);
+                    new { id = newUser.Id }, 
+                    newUser);
             }
             catch (Exception ex)
             {
@@ -81,8 +81,8 @@ namespace Co_Voyageur.Server.Controllers
         {
             try
             {
-                var updatedContact = await _userService.Update(id, user);
-                return Ok(updatedContact);
+                var updatedUser = await _userService.Update(id, user);
+                return Ok(updatedUser);
             }
             catch (KeyNotFoundException nex)
             {

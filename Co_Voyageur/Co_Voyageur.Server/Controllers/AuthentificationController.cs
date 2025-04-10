@@ -11,7 +11,7 @@ using Microsoft.IdentityModel.Tokens;
 namespace Co_Voyageur.Server.Controllers;
 
 [ApiController]
-[Route("api/[controller]")]
+[Route("api/auth")]
 public class AuthentificationController : Controller
 {
     private readonly IUserService _userService;
