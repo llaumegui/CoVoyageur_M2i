@@ -7,12 +7,12 @@ namespace Co_Voyageur.Server.Models
 
         public int Id { get; set; }
         [Required]
-        public string? Model { get; set; }
+        public string Model { get; set; }
         [Required]
         public int PassengerSize { get; set; }
         public string? Color { get; set; }
         [Required]
-        public string? Plate { get; set; }
+        public string Plate { get; set; }
 
         public User User { get; set; }
 

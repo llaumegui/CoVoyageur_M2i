@@ -3,6 +3,9 @@ using Co_Voyageur.Server.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using Co_Voyageur.Server.Helpers;
+using Co_Voyageur.Server.Models;
+using Co_Voyageur.Server.Services;
+using Co_Voyageur.Server.Services.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -23,11 +26,19 @@ builder.Services.AddSwaggerGen(c =>
 
 builder.Services.AddDbContext<AppDbContext>(options =>
 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
-builder.Services.AddScoped<CarRepository>();
-builder.Services.AddScoped<ReviewRepository>();
-builder.Services.AddScoped<StepRepository>();
-builder.Services.AddScoped<TripRepository>();
-builder.Services.AddScoped<UserRepository>();
+
+builder.Services.AddScoped<IRepository<Car,int>,CarRepository>();
+builder.Services.AddScoped<IRepository<Review,int>, ReviewRepository>();
+builder.Services.AddScoped<IRepository<User,int>,UserRepository>();
+builder.Services.AddScoped<IRepository<Step,int>,StepRepository>();
+builder.Services.AddScoped<IRepository<Trip,int>,TripRepository>();
+
+builder.Services.AddScoped<CarService>();
+builder.Services.AddScoped<ReviewService>();
+builder.Services.AddScoped<UserService>();
+builder.Services.AddScoped<StepService>();
+builder.Services.AddScoped<TripService>();
+
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 builder.Services.Configure<AppSettings>(builder.Configuration.GetSection("AppSettings"));
