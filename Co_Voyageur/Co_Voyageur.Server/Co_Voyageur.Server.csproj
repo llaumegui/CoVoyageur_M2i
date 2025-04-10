@@ -43,7 +43,6 @@
     <Folder Include="Migrations\" />
     <Folder Include="Data\" />
     <Folder Include="Repositories\" />
-    <Folder Include="Services\" />
   </ItemGroup>
 
 </Project>
