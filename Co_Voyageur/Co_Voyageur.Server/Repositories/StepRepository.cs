@@ -21,7 +21,7 @@ namespace Co_Voyageur.Server.Repositories
         {
             throw new NotImplementedException();
         }
-        public Task<Step?> Update(int id, Step item)
+        public Task<Step?> Update(Step item)
         {
             throw new NotImplementedException();
         }

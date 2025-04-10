@@ -1,6 +1,7 @@
 ﻿using System.Linq.Expressions;
 using Co_Voyageur.Server.Data;
 using Co_Voyageur.Server.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace Co_Voyageur.Server.Repositories
 {
@@ -30,10 +31,14 @@ namespace Co_Voyageur.Server.Repositories
         {
             return Task.FromResult<IEnumerable<User>>(_appDbContext.Users);
         }
-        public async Task<User?> Update(int id, User item)
+        public async Task<User?> Update(User item)
         {
-            throw new NotImplementedException();
+            if(_appDbContext.Entry(item).State is not EntityState.Modified)
+                return null;
+            await _appDbContext.SaveChangesAsync();
+            return item;
         }
+        
         public async Task<bool> Delete(int id)
         {
             throw new NotImplementedException();

@@ -21,7 +21,7 @@ namespace Co_Voyageur.Server.Repositories
         {
             throw new NotImplementedException();
         }
-        public Task<Trip?> Update(int id, Trip item)
+        public Task<Trip?> Update(Trip item)
         {
             throw new NotImplementedException();
         }

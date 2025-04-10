@@ -21,7 +21,7 @@ namespace Co_Voyageur.Server.Repositories
         {
             throw new NotImplementedException();
         }
-        public Task<Car?> Update(int id, Car item)
+        public Task<Car?> Update(Car item)
         {
             throw new NotImplementedException();
         }
