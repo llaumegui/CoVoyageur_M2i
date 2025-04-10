@@ -26,23 +26,28 @@ namespace Co_Voyageur.Server.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("id");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Color")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("color");
 
                     b.Property<string>("Model")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("model");
 
                     b.Property<int>("PassengerSize")
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("passenger_size");
 
                     b.Property<string>("Plate")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("plate");
 
                     b.Property<int>("UserId")
                         .HasColumnType("int");
@@ -62,7 +67,7 @@ namespace Co_Voyageur.Server.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("Comments")
+                    b.Property<string>("Comment")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Rate")
@@ -130,6 +135,12 @@ namespace Co_Voyageur.Server.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("CreatedBy")
+                        .HasColumnType("int");
+
                     b.Property<string>("Email")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -138,11 +149,10 @@ namespace Co_Voyageur.Server.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool?>("IsAdmin")
-                        .IsRequired()
+                    b.Property<bool>("IsAdmin")
                         .HasColumnType("bit");
 
-                    b.Property<bool?>("IsVerified")
+                    b.Property<bool>("IsVerified")
                         .HasColumnType("bit");
 
                     b.Property<string>("LastName")
@@ -168,9 +178,11 @@ namespace Co_Voyageur.Server.Migrations
                         new
                         {
                             Id = 1,
+                            CreatedAt = new DateTime(2025, 4, 10, 14, 2, 56, 335, DateTimeKind.Utc).AddTicks(4126),
                             Email = "Admin.Root@gmail.com",
                             FirstName = "Mister",
                             IsAdmin = true,
+                            IsVerified = false,
                             LastName = "Admin",
                             Password = "root",
                             Phone = "0102030405"
@@ -178,9 +190,11 @@ namespace Co_Voyageur.Server.Migrations
                         new
                         {
                             Id = 2,
+                            CreatedAt = new DateTime(2025, 4, 10, 14, 2, 56, 335, DateTimeKind.Utc).AddTicks(5434),
                             Email = "John.Doe@gmail.com",
                             FirstName = "John",
                             IsAdmin = false,
+                            IsVerified = false,
                             LastName = "Doe",
                             Password = "test",
                             Phone = "0504030201"

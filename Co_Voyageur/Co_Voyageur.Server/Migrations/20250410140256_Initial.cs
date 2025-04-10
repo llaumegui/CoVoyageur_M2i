@@ -40,7 +40,9 @@ namespace Co_Voyageur.Server.Migrations
                     Picture = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Phone = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     IsAdmin = table.Column<bool>(type: "bit", nullable: false),
-                    IsVerified = table.Column<bool>(type: "bit", nullable: true)
+                    IsVerified = table.Column<bool>(type: "bit", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CreatedBy = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -72,17 +74,17 @@ namespace Co_Voyageur.Server.Migrations
                 name: "Cars",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
+                    id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Model = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    PassengerSize = table.Column<int>(type: "int", nullable: false),
-                    Color = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Plate = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    model = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    passenger_size = table.Column<int>(type: "int", nullable: false),
+                    color = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    plate = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     UserId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Cars", x => x.Id);
+                    table.PrimaryKey("PK_Cars", x => x.id);
                     table.ForeignKey(
                         name: "FK_Cars_Users_UserId",
                         column: x => x.UserId,
@@ -97,7 +99,7 @@ namespace Co_Voyageur.Server.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Comments = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Comment = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Rate = table.Column<int>(type: "int", nullable: false),
                     UserId = table.Column<int>(type: "int", nullable: true)
                 },
@@ -137,11 +139,11 @@ namespace Co_Voyageur.Server.Migrations
 
             migrationBuilder.InsertData(
                 table: "Users",
-                columns: new[] { "Id", "Email", "FirstName", "IsAdmin", "IsVerified", "LastName", "Password", "Phone", "Picture" },
+                columns: new[] { "Id", "CreatedAt", "CreatedBy", "Email", "FirstName", "IsAdmin", "IsVerified", "LastName", "Password", "Phone", "Picture" },
                 values: new object[,]
                 {
-                    { 1, "Admin.Root@gmail.com", "Mister", true, null, "Admin", "root", "0102030405", null },
-                    { 2, "John.Doe@gmail.com", "John", false, null, "Doe", "test", "0504030201", null }
+                    { 1, new DateTime(2025, 4, 10, 14, 2, 56, 335, DateTimeKind.Utc).AddTicks(4126), null, "Admin.Root@gmail.com", "Mister", true, false, "Admin", "root", "0102030405", null },
+                    { 2, new DateTime(2025, 4, 10, 14, 2, 56, 335, DateTimeKind.Utc).AddTicks(5434), null, "John.Doe@gmail.com", "John", false, false, "Doe", "test", "0504030201", null }
                 });
 
             migrationBuilder.CreateIndex(
