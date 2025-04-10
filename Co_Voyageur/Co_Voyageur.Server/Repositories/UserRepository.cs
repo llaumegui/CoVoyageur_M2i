@@ -17,15 +17,17 @@ namespace Co_Voyageur.Server.Repositories
 
         public async Task<User?> Add(User item)
         {
-            throw new NotImplementedException();
+            await _appDbContext.Users.AddAsync(item);
+            await _appDbContext.SaveChangesAsync();
+            return item;
         }
         public async Task<User?> GetById(int id)
         {
-            throw new NotImplementedException();
+            return await _appDbContext.Users.FindAsync(id);
         }
         public async Task<User?> GetByPredicate(Expression<Func<User, bool>> predicate)
         {
-            throw new NotImplementedException();
+            return await _appDbContext.Users.FirstOrDefaultAsync(predicate);
         }
         public Task<IEnumerable<User>> GetAll()
         {
@@ -41,7 +43,14 @@ namespace Co_Voyageur.Server.Repositories
         
         public async Task<bool> Delete(int id)
         {
-            throw new NotImplementedException();
+            var user = await GetById(id);
+            
+            if (user is null)
+                return false;
+
+            _appDbContext.Users.Remove(user);
+            await _appDbContext.SaveChangesAsync();
+            return true;
         }
     }
 }

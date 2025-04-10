@@ -1,33 +1,55 @@
 ﻿using System.Linq.Expressions;
+using Co_Voyageur.Server.Data;
 using Co_Voyageur.Server.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace Co_Voyageur.Server.Repositories
 {
     public class StepRepository : IRepository<Step, int>
     {
-        public Task<Step?> Add(Step item)
+        private readonly AppDbContext _appDbContext;
+
+        public StepRepository(AppDbContext appDbContext)
         {
-            throw new NotImplementedException();
+            _appDbContext = appDbContext;
         }
-        public Task<Step?> GetById(int id)
+
+        public async Task<Step?> Add(Step item)
         {
-            throw new NotImplementedException();
+            await _appDbContext.Steps.AddAsync(item);
+            await _appDbContext.SaveChangesAsync();
+            return item;
         }
-        public Task<Step?> GetByPredicate(Expression<Func<Step, bool>> predicate)
+        public async Task<Step?> GetById(int id)
         {
-            throw new NotImplementedException();
+            return await _appDbContext.Steps.FindAsync(id);
+        }
+        public async Task<Step?> GetByPredicate(Expression<Func<Step, bool>> predicate)
+        {
+            return await _appDbContext.Steps.FirstOrDefaultAsync(predicate);
         }
         public Task<IEnumerable<Step>> GetAll()
         {
-            throw new NotImplementedException();
+            return Task.FromResult<IEnumerable<Step>>(_appDbContext.Steps);
         }
-        public Task<Step?> Update(Step item)
+        public async Task<Step?> Update(Step item)
         {
-            throw new NotImplementedException();
+            if(_appDbContext.Entry(item).State is not EntityState.Modified)
+                return null;
+            await _appDbContext.SaveChangesAsync();
+            return item;
         }
-        public Task<bool> Delete(int id)
+        
+        public async Task<bool> Delete(int id)
         {
-            throw new NotImplementedException();
+            var step = await GetById(id);
+            
+            if (step is null)
+                return false;
+
+            _appDbContext.Steps.Remove(step);
+            await _appDbContext.SaveChangesAsync();
+            return true;
         }
     }
 }

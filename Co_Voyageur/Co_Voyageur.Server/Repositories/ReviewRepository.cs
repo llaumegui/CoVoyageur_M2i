@@ -1,33 +1,55 @@
 ﻿using System.Linq.Expressions;
+using Co_Voyageur.Server.Data;
 using Co_Voyageur.Server.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace Co_Voyageur.Server.Repositories
 {
     public class ReviewRepository : IRepository<Review, int>
     {
-        public Task<Review?> Add(Review item)
+        private readonly AppDbContext _appDbContext;
+
+        public ReviewRepository(AppDbContext appDbContext)
         {
-            throw new NotImplementedException();
+            _appDbContext = appDbContext;
         }
-        public Task<Review?> GetById(int id)
+
+        public async Task<Review?> Add(Review item)
         {
-            throw new NotImplementedException();
+            await _appDbContext.Reviews.AddAsync(item);
+            await _appDbContext.SaveChangesAsync();
+            return item;
         }
-        public Task<Review?> GetByPredicate(Expression<Func<Review, bool>> predicate)
+        public async Task<Review?> GetById(int id)
         {
-            throw new NotImplementedException();
+            return await _appDbContext.Reviews.FindAsync(id);
+        }
+        public async Task<Review?> GetByPredicate(Expression<Func<Review, bool>> predicate)
+        {
+            return await _appDbContext.Reviews.FirstOrDefaultAsync(predicate);
         }
         public Task<IEnumerable<Review>> GetAll()
         {
-            throw new NotImplementedException();
+            return Task.FromResult<IEnumerable<Review>>(_appDbContext.Reviews);
         }
-        public Task<Review?> Update(Review item)
+        public async Task<Review?> Update(Review item)
         {
-            throw new NotImplementedException();
+            if(_appDbContext.Entry(item).State is not EntityState.Modified)
+                return null;
+            await _appDbContext.SaveChangesAsync();
+            return item;
         }
-        public Task<bool> Delete(int id)
+        
+        public async Task<bool> Delete(int id)
         {
-            throw new NotImplementedException();
+            var review = await GetById(id);
+            
+            if (review is null)
+                return false;
+
+            _appDbContext.Reviews.Remove(review);
+            await _appDbContext.SaveChangesAsync();
+            return true;
         }
     }
 }

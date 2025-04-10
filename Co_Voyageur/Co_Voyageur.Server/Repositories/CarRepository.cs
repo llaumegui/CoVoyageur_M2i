@@ -1,33 +1,55 @@
 ﻿using System.Linq.Expressions;
+using Co_Voyageur.Server.Data;
 using Co_Voyageur.Server.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace Co_Voyageur.Server.Repositories
 {
     public class CarRepository : IRepository<Car, int>
     {
-        public Task<Car?> Add(Car item)
+        private readonly AppDbContext _appDbContext;
+
+        public CarRepository(AppDbContext appDbContext)
         {
-            throw new NotImplementedException();
+            _appDbContext = appDbContext;
         }
-        public Task<Car?> GetById(int id)
+
+        public async Task<Car?> Add(Car item)
         {
-            throw new NotImplementedException();
+            await _appDbContext.Cars.AddAsync(item);
+            await _appDbContext.SaveChangesAsync();
+            return item;
         }
-        public Task<Car?> GetByPredicate(Expression<Func<Car, bool>> predicate)
+        public async Task<Car?> GetById(int id)
         {
-            throw new NotImplementedException();
+            return await _appDbContext.Cars.FindAsync(id);
+        }
+        public async Task<Car?> GetByPredicate(Expression<Func<Car, bool>> predicate)
+        {
+            return await _appDbContext.Cars.FirstOrDefaultAsync(predicate);
         }
         public Task<IEnumerable<Car>> GetAll()
         {
-            throw new NotImplementedException();
+            return Task.FromResult<IEnumerable<Car>>(_appDbContext.Cars);
         }
-        public Task<Car?> Update(Car item)
+        public async Task<Car?> Update(Car item)
         {
-            throw new NotImplementedException();
+            if(_appDbContext.Entry(item).State is not EntityState.Modified)
+                return null;
+            await _appDbContext.SaveChangesAsync();
+            return item;
         }
-        public Task<bool> Delete(int id)
+        
+        public async Task<bool> Delete(int id)
         {
-            throw new NotImplementedException();
+            var car = await GetById(id);
+            
+            if (car is null)
+                return false;
+
+            _appDbContext.Cars.Remove(car);
+            await _appDbContext.SaveChangesAsync();
+            return true;
         }
     }
 }
