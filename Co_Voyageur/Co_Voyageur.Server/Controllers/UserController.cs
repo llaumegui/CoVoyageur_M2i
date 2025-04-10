@@ -29,108 +29,94 @@ namespace Co_Voyageur.Server.Controllers
             var clients = await _userService.GetAll();
             return Ok(clients);
         }
-
-        #region Authentification_and_Create
-                
-        [HttpPost("register")]
-        [ProducesResponseType(StatusCodes.Status201Created)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
-        public async Task<ActionResult<RegisterResponseDTO>> Register([FromBody] RegisterRequestDTO registerDto)
+        
+        [HttpGet("{id}")]
+        [SwaggerOperation(Summary = "Obtenir un user par ID")]
+        [ProducesResponseType(typeof(User), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(string), StatusCodes.Status404NotFound)]
+        public async Task<IActionResult> GetById(int id)
         {
-            var checkUser = await _userService.GetByEmail(registerDto.Email);
-            if (checkUser != null)
-                return BadRequest(new RegisterResponseDTO
-                    { IsSuccessful = false, ErrorMessage = "Email already exist !" });
-
-            if (registerDto.IsAdmin && User.FindFirstValue(ClaimTypes.Role) != Constants.RoleAdmin)
-                return Unauthorized(new RegisterResponseDTO
-                    { IsSuccessful = false, ErrorMessage = "You can't create an administrator as a user." });
-
-            int? createdBy = null;
-            string? userIdClaim = User.FindFirstValue(Constants.ClaimUserId);
-            if (!string.IsNullOrEmpty(userIdClaim) && int.TryParse(userIdClaim, out int userId))
-            {
-                createdBy = userId;
-            }
-
-            var user = new User
-            {
-                FirstName = registerDto.FirstName,
-                LastName = registerDto.LastName,
-                Email = registerDto.Email,
-                Phone = registerDto.Phone,
-                Password = _userService.EncryptPassword(registerDto.Password!),
-                IsAdmin = registerDto.IsAdmin,
-                CreatedAt = DateTime.UtcNow,
-                CreatedBy = createdBy
-            };
-
+            var user = await _userService.GetById(id);
+            return user != null ? Ok(user) : NotFound($"User avec l'id {id} non trouvé.");
+        }
+        
+        [HttpGet("email/{email}")]
+        [SwaggerOperation(Summary = "Obtenir un contact par email")]
+        [ProducesResponseType(typeof(User), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(string), StatusCodes.Status404NotFound)]
+        public async Task<IActionResult> GetByEmail(string email)
+        {
+            var contact = await _userService.GetByEmail(email);
+            return contact != null ? Ok(contact) : NotFound($"User avec le mail \"{email}\" non trouvé.");
+        }
+        
+        // POST /user
+        [HttpPost]
+        [SwaggerOperation(Summary = "Créer un nouveau user")]
+        [ProducesResponseType(typeof(User), StatusCodes.Status201Created)]
+        [ProducesResponseType(typeof(string), StatusCodes.Status400BadRequest)]
+        public async Task<IActionResult> Create([FromBody] User user)
+        {
             try
             {
-                var newUser = await _userService.Create(user);
-                return Ok(new RegisterResponseDTO { IsSuccessful = true, User = newUser });
+                var newContact = await _userService.Create(user);
+                return CreatedAtAction(nameof(GetById), 
+                    new { id = newContact.Id }, 
+                    newContact);
             }
-            catch
+            catch (Exception ex)
             {
-                return BadRequest(new RegisterResponseDTO { IsSuccessful = false, ErrorMessage = "Create failed." });
+                return BadRequest($"Erreur lors de la création du user : {ex.Message}");
             }
         }
-
-        [HttpGet("login")]
-        [ProducesResponseType(StatusCodes.Status201Created)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult<LoginResponseDTO>> Login([FromBody] LoginRequestDTO loginDto)
+        
+        // PUT /user/{id}
+        [HttpPut("{id}")]
+        [SwaggerOperation(Summary = "Mettre à jour un user",
+            Description = "Met à jour les informations d'un user existant.")]
+        [ProducesResponseType(typeof(User), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(string), StatusCodes.Status404NotFound)]
+        [ProducesResponseType(typeof(string), StatusCodes.Status400BadRequest)]
+        public async Task<IActionResult> Update(int id, [FromBody] User user)
         {
-            var user = await _userService.GetByEmail(loginDto.Email);
-
-            if (user == null)
-                return BadRequest(new LoginResponseDTO
-                    { IsSuccessful = false, ErrorMessage = "Invalid Authentication !" });
-
-            var (verified, needsUpgrade) = _userService.CheckPassword(user.Password!, loginDto.Password!);
-
-            if (!verified)
-                return BadRequest(new LoginResponseDTO
-                    { IsSuccessful = false, ErrorMessage = "Invalid Authentication !" });
-
-            if (needsUpgrade)
+            try
             {
-                user.Password = _userService.EncryptPassword(loginDto.Password!);
+                var updatedContact = await _userService.Update(id, user);
+                return Ok(updatedContact);
             }
-
-            #region JWT
-            string role = user.IsAdmin ? Constants.RoleAdmin : Constants.RoleUser;
-
-            var claims = new List<Claim> // detinée à aller dans la partie Payload du JWT
+            catch (KeyNotFoundException nex)
             {
-                new(ClaimTypes.Role, role),
-                new(Constants.ClaimUserId, user.Id!.ToString()!),
-            };
-
-            var appSettings = _userService.GetAppSettings();
-            var securityKey = appSettings.SecretKey;
-
-            var signingCredentials = new SigningCredentials(
-                new SymmetricSecurityKey(Encoding.ASCII.GetBytes(securityKey)),
-                SecurityAlgorithms.HmacSha256);
-
-            var jwt = new JwtSecurityToken(
-                claims: claims,
-                expires: DateTime.UtcNow.AddDays(appSettings.TokenExpirationDays),
-                signingCredentials: signingCredentials
-            );
-
-            string token = new JwtSecurityTokenHandler().WriteToken(jwt);
-            #endregion
-
-            return Ok(new LoginResponseDTO
+                return NotFound(nex.Message);
+            }
+            catch (Exception ex)
             {
-                IsSuccessful = true,
-                User = user,
-                Token = token
-            });
+                return BadRequest($"Erreur lors de la mise à jour du user : {ex.Message}");
+            }
         }
-        #endregion
+
+        // DELETE /user/{id}
+        [HttpDelete("{id}")]
+        [SwaggerOperation(Summary = "Supprimer un user",
+            Description = "Supprime un user à partir de son identifiant.")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(typeof(string), StatusCodes.Status404NotFound)]
+        [ProducesResponseType(typeof(string), StatusCodes.Status400BadRequest)]
+        public async Task<IActionResult> Delete(int id)
+        {
+            try
+            {
+                await _userService.Delete(id);
+                return NoContent();
+            }
+            catch (KeyNotFoundException ex)
+            {
+                return NotFound(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest($"Erreur lors de la suppression du user : {ex.Message}");
+            }
+        }
+        
     }
 }
