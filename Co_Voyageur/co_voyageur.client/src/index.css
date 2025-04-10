@@ -8,12 +8,17 @@
   --font-color: #353535;
   --button-update-color: #C60B0B;
   --font-site: "Poppins", sans-serif;
-  
+  --background-image-signup: url('D:\Projet\CoVoyageur_M2i\Co_Voyageur\co_voyageur.client\public\Images\backgroundSignIn.png');
+  --background-image-login: url('D:\Projet\CoVoyageur_M2i\Co_Voyageur\co_voyageur.client\public\Images\backgroundLogIn.png');
+  --background-image-travel: url('D:\Projet\CoVoyageur_M2i\Co_Voyageur\co_voyageur.client\public\Images\backgroundSubmitTravel.jpg');
 }
 
 body,html{
   margin: 0;
   font-family: var(--font-site);
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+  scrollbar-width: thin;
 }
 
 a{
@@ -23,10 +28,17 @@ a{
   font-family: var(--font-site);
 }
 
-h1,h2,h3,h4,h5,h6{
+h2,h3,h4,h5,h6{
   font-family: var(--font-site);
   color: var(--font-color);
   font-weight: 400;
+}
+
+h1{
+  font-family: var(--font-site);
+  color: var(--white-text);
+  font-weight: 400;
+  text-shadow: 0px 0px 10px rgba(0,0,0,0.5);
 }
 
 .button-submit-style{
@@ -49,9 +61,73 @@ h1,h2,h3,h4,h5,h6{
 .form-style{
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
   gap: 1rem;
   padding: 2rem;
-  border-radius: 0.5rem;
-  background-color: var(--white-text);
-  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  border-radius: 1rem;
+  background: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(5px);
+  width: 30%;
+  >input{
+    width: 50%;
+    height: 3rem;
+  }
+}
+
+.section-form-style{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  height: 90vh;
+}
+
+.section-background-style-signup{
+  background-image:var(--background-image-signup);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 100%;
+}
+
+.section-background-style-login{
+  background-image: var(--background-image-login);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 100%;
+}
+
+.section-background-style-travel{
+  background-image: var(--background-image-travel);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 100%;
+}
+
+.go-to-login-page, .go-to-signin-page{
+  color: var(--white-text);
+  font-size: 1rem;
+  font-family: var(--font-site);
+  text-shadow: 0px 0px 10px rgba(0,0,0,0.5);
+
+}
+
+.go-to-login-page:hover, .go-to-signin-page:hover{
+  text-decoration: underline;
+}
+
+@media screen and (max-width: 600px) {
+  
+  .form-style{
+    width: 50%;
+    text-align: center;
+    >input{
+      width: 80%;
+      height: 2.5rem;
+    }
+  }
 }

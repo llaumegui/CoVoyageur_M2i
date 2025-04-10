@@ -3,8 +3,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: var(--background-color);
-    
+    background-color: var(--background-color);  
 }
 .search-bar-container{
     height: 4rem;
@@ -38,9 +37,9 @@
 }
 
 input{
-    height: 2rem;
+    height: 2.5rem;
     opacity: 1;
-    font-size: 16px;
+    font-size: 1.2rem;
     border-radius: 0.5rem;
     border: none;
 }

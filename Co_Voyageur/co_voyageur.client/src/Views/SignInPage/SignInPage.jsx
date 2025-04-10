@@ -1,6 +1,5 @@
 import React, {useState} from 'react';
 import NavBar from '../../Components/NavBar/NavBar';
-import './SignInPage.css';
 const SignInPage = () => {
     const [error, setError] = useState('');
     const [email, setEmail] = useState('');
@@ -48,34 +47,28 @@ const SignInPage = () => {
     return (
     <>
         <NavBar></NavBar>
-        <section>
+        <section className='section-form-style section-background-style-signup'>
                 <form className='form-style'>
                     {displayForm && 
-
-                    <div>
+                    <>
                         <h1>Inscription</h1>
-                        <input type="text" placeholder='E mail' value={email} onChange={emailChange}/>
-                        <input type="password" placeholder='Mot de passe' value={password} onChange={passwordChange}/>
-                        <input type="password" placeholder='Confirmer le mot de passe' value={confirmPassword} onChange={confirmPasswordChange} />
+                        <input type="text" placeholder='E mail' value={email} onChange={emailChange} required/>
+                        <input type="password" placeholder='Mot de passe' value={password} onChange={passwordChange} required/>
+                        <input type="password" placeholder='Confirmer le mot de passe' value={confirmPassword} onChange={confirmPasswordChange} required/>
                         <button onClick={handleSubmit} className='button-submit-style'>Suivant</button>
                         {error && <p className="error">{error}</p>}
-                        <a href='/login'>Déjà incrit? Connectez vous!</a>
-                    </div>
-
+                        <a href='/login' className="go-to-login-page">Déjà incrit? Connectez vous!</a>
+                    </>
                     }
                     {!displayForm &&
-
-                    <div>
+                        <>
                         <h1>Suite de l'inscription</h1>
                         <input type="text" placeholder='Nom' required/>
                         <input type="text" placeholder='Prénom' required/>
                         <input type="text" placeholder='Téléphone' required/>
                         <button type='submit' className='button-submit-style'>S'inscrire</button>
-                    </div>
-                    
-
-                    }
-                    
+                        </>
+                    }                  
                 </form>
         </section>
     </>

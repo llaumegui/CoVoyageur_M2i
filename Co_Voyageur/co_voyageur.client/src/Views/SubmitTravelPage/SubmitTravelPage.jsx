@@ -6,8 +6,6 @@ const SubmitTravelPage = () => {
     return (
         <>
             <NavBar/>
-            <img src="\Images\backgroundSubmitTravel.png" alt="backgroundSubmitTravel" className='background-image-submit-travel' />
-            <h2 className="title-submit-travel-page">Proposer un trajet</h2>
             <SubmitTravelForm/>
         </>
     );
