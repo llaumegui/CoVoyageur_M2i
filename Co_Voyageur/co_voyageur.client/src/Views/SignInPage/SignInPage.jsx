@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import NavBar from '../../Components/NavBar/NavBar';
+import './SignInPage.css';
 const SignInPage = () => {
     const [error, setError] = useState('');
     const [email, setEmail] = useState('');
@@ -25,19 +26,19 @@ const SignInPage = () => {
         const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/; // Minimum 8 caractères avec au moins une lettre et un chiffre
 
         if(!email && !password && !confirmPassword) {
-            setError('Veuillez remplir tous les champs');
+            setError('Veuillez remplir tous les champs!');
             return;
         }
         if (!emailRegex.test(email)) {
-            setError('Email invalide');
+            setError('Email invalide!');
             return;
         }
         if (!passwordRegex.test(password)) {
-            setError('Le mot de passe doit contenir au moins 8 caractères, une lettre et un chiffre');
+            setError('Le mot de passe doit contenir au moins 8 caractères, une lettre et un chiffre!');
             return;
         }
         if (password !== confirmPassword) {
-            setError('Les mots de passe ne correspondent pas');
+            setError('Les mots de passe ne correspondent pas!');
             return;
         }
         setError('');
@@ -47,8 +48,8 @@ const SignInPage = () => {
     return (
     <>
         <NavBar></NavBar>
-        <section className='section-form-style section-background-style-signup'>
-                <form className='form-style'>
+        <section className="signin__container container">
+                <form>
                     {displayForm && 
                     <>
                         <h1>Inscription</h1>
@@ -56,7 +57,6 @@ const SignInPage = () => {
                         <input type="password" placeholder='Mot de passe' value={password} onChange={passwordChange} required/>
                         <input type="password" placeholder='Confirmer le mot de passe' value={confirmPassword} onChange={confirmPasswordChange} required/>
                         <button onClick={handleSubmit} className='button-submit-style'>Suivant</button>
-                        {error && <p className="error">{error}</p>}
                         <a href='/login' className="go-to-login-page">Déjà incrit? Connectez vous!</a>
                     </>
                     }
@@ -70,6 +70,7 @@ const SignInPage = () => {
                         </>
                     }                  
                 </form>
+                {error && <p className='error'>{error}</p>}
         </section>
     </>
         )

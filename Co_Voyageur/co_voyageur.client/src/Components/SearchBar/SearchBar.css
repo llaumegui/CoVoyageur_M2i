@@ -17,10 +17,3 @@
     backdrop-filter: blur(5px);
     border-radius: 1rem;
 }
-
-.search__container-input{
-    padding: 1rem;
-    border-radius: 0.5rem;
-    font-size:medium;
-    border: none;
-}

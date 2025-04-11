@@ -6,7 +6,7 @@ const SearchTravelsPage = () => {
     return (
         <>
         <NavBar></NavBar>
-        <img src="\Images\CoVoyagerImageBackground02.jpg" alt="ImageBackground" className="background-image-searchTravels" />
+        <img src="\Images\CoVoyagerImageBackground02.jpg" alt="ImageBackground" className="hero" />
         <SearchBar/>
         <Filters></Filters>
 
