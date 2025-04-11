@@ -2,7 +2,6 @@ import React from 'react';
 import NavBar from '../../Components/NavBar/NavBar.jsx';
 import HelloUser from '../../Components/HelloUser/HelloUser.jsx';
 import Bento from '../../Components/Profile/Bento/Bento.jsx';
-import './ProfilePage.css';
 const ProfilePage = () => {
     return (
         <>

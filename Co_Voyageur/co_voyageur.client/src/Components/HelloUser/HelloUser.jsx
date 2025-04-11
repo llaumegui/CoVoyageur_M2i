@@ -1,5 +1,4 @@
 import React from 'react';
-import './HelloUser.css';
 const HelloUser = () => {
     const username = "John Doe";
     return (

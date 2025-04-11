@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import './Filters.css';
 const Filters = () => {
     const [selectedFilter, setSelectedFilter] = useState(null);
     const resetFilters = (event) => {

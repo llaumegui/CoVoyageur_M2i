@@ -1,7 +1,6 @@
 import React from 'react';
 import NavBar from '../../Components/NavBar/NavBar';
 import SubmitTravelForm from '../../Components/SubmitTravelForm/SubmitTravelForm';
-import './SubmitTravelPage.css';
 const SubmitTravelPage = () => {
     return (
         <>

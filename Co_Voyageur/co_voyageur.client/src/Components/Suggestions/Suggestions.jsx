@@ -1,6 +1,5 @@
 import React from 'react';
 import SuggestionsJSON from './Suggestions.json';
-import './Suggestions.css';
 const Suggestions = () => {
         let maxSuggestions = 6;
         let suggestions =0;

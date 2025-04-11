@@ -1,5 +1,4 @@
 import React from 'react';
-import './BackgroundBlob.css';
 
 const BackgroundBlob = () => {
     return (

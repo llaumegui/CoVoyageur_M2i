@@ -1,5 +1,5 @@
 import React from 'react';
-import '../Bento/Bento.css';
+
 const FooterUser = () => {
     return (
         <>

@@ -1,6 +1,5 @@
 import React from 'react';
 import NavBar from '../../Components/NavBar/NavBar';
-import './HomePage.css';
 import SearchBar from '../../Components/SearchBar/SearchBar';
 
 const HomePage = () => {

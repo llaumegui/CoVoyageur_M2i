@@ -1,5 +1,4 @@
 import React from 'react';
-import './ReviewCard.css';
 const BodyReviews = () => {
     const reviewExample = {
         profileImage:'https://picsum.photos/50',

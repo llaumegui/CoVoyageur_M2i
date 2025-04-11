@@ -1,5 +1,4 @@
 import React from 'react';
-import './Fav.css'
 const BodyFavs = () => {
     const favExample={
         from: "Paris",
