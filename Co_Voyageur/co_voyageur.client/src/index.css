@@ -106,3 +106,62 @@ h2{
 .container{
   text-align: center;
 }
+
+.navbar__phone{
+  display: none;
+}
+
+@media screen and (max-width: 768px) {
+  .hero{
+    height: 150px;
+  }
+  form{
+    width: 80%;
+  }
+  .navbar{
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+  .navbar__logo{
+    width: 100%;
+  }
+  
+  .navbar__phone{
+    display: block;
+  }
+
+  .navbar__right{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .navbar__link{
+    display: none;
+  }
+  .search__container{
+    display: flex;
+    flex-direction: column;
+  }
+  .search__container-input{
+    width: 80%;
+  }
+  .card{
+    width: 80%;
+  }
+  .card-large{
+    width: 80%;
+  }
+
+  .card__header-title{
+    margin: 1rem;
+  }
+
+  .not-found__image{
+    width: 80%
+  }
+
+  .suggestion__item{
+    width: 80%;
+  }
+}

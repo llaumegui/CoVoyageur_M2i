@@ -7,10 +7,10 @@ const SearchPage = () => {
         <>
             <NavBar></NavBar>
             <img src="\Images\CoVoyagerImageBackground03.jpg" alt="ImageHero" className="hero"/>
-            <div className='SearchBar-container'>
             <SearchBar></SearchBar>
-            </div>
+            <div>
             <Suggestions/>
+            </div>
 
         </>
     );
