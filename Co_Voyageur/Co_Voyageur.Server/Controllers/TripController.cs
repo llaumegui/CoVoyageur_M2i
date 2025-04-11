@@ -7,14 +7,21 @@ namespace Co_Voyageur.Server.Controllers;
 
 [ApiController]
 [Route("api/trip")]
-public class TripController(TripService service) : ControllerBase
+public class TripController : ControllerBase
 {
+    private readonly TripService _tripService;
+
+    public TripController(TripService tripService)
+    {
+        _tripService = tripService;
+    }
+
     [HttpGet("trips")]
     [SwaggerOperation(Summary = "Obtenir la liste des objets")]
     [ProducesResponseType(typeof(IEnumerable<Trip>), StatusCodes.Status200OK)]
     public async Task<IActionResult> Get()
     {
-        var items = await service.GetAll();
+        var items = await _tripService.GetAll();
         return Ok(items);
     }
 
@@ -24,7 +31,7 @@ public class TripController(TripService service) : ControllerBase
     [ProducesResponseType(typeof(string), StatusCodes.Status404NotFound)]
     public async Task<IActionResult> GetById(int id)
     {
-        var item = await service.GetById(id);
+        var item = await _tripService.GetById(id);
         return item != null ? Ok(item) : NotFound($"objet avec l'id {id} non trouvé.");
     }
 
@@ -36,7 +43,7 @@ public class TripController(TripService service) : ControllerBase
     {
         try
         {
-            var newItem = await service.Create(item);
+            var newItem = await _tripService.Create(item);
             return CreatedAtAction(nameof(GetById),
                 new { id = newItem.Id },
                 newItem);
@@ -57,7 +64,7 @@ public class TripController(TripService service) : ControllerBase
     {
         try
         {
-            var updatedItem = await service.Update(id, user);
+            var updatedItem = await _tripService.Update(id, user);
             return Ok(updatedItem);
         }
         catch (KeyNotFoundException nex)
@@ -80,7 +87,7 @@ public class TripController(TripService service) : ControllerBase
     {
         try
         {
-            await service.Delete(id);
+            await _tripService.Delete(id);
             return NoContent();
         }
         catch (KeyNotFoundException ex)

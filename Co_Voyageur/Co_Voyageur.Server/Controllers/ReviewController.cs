@@ -1,5 +1,7 @@
+using Co_Voyageur.Server.DTO;
 using Co_Voyageur.Server.Models;
 using Co_Voyageur.Server.Services;
+using Co_Voyageur.Server.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
 
@@ -7,14 +9,21 @@ namespace Co_Voyageur.Server.Controllers;
 
 [ApiController]
 [Route("api/review")]
-public class ReviewController(ReviewService service) : ControllerBase
+public class ReviewController : ControllerBase
 {
+    private readonly IUserService _userService;
+    private readonly ReviewService _reviewService;
+    public ReviewController(ReviewService reviewService, IUserService userService)
+    {
+        _userService = userService;
+        _reviewService = reviewService;
+    }
     [HttpGet("reviews")]
     [SwaggerOperation(Summary = "Obtenir la liste des objets")]
     [ProducesResponseType(typeof(IEnumerable<Review>), StatusCodes.Status200OK)]
     public async Task<IActionResult> Get()
     {
-        var items = await service.GetAll();
+        var items = await _reviewService.GetAll();
         return Ok(items);
     }
 
@@ -24,7 +33,7 @@ public class ReviewController(ReviewService service) : ControllerBase
     [ProducesResponseType(typeof(string), StatusCodes.Status404NotFound)]
     public async Task<IActionResult> GetById(int id)
     {
-        var item = await service.GetById(id);
+        var item = await _reviewService.GetById(id);
         return item != null ? Ok(item) : NotFound($"objet avec l'id {id} non trouvé.");
     }
 
@@ -32,19 +41,30 @@ public class ReviewController(ReviewService service) : ControllerBase
     [SwaggerOperation(Summary = "Créer un nouvel objet")]
     [ProducesResponseType(typeof(Review), StatusCodes.Status201Created)]
     [ProducesResponseType(typeof(string), StatusCodes.Status400BadRequest)]
-    public async Task<IActionResult> Create([FromBody] Review item)
+    public async Task<IActionResult> Create([FromBody] ReviewDTO reviewDTO)
     {
         try
         {
-            var newItem = await service.Create(item);
-            return CreatedAtAction(nameof(GetById),
-                new { id = newItem.Id },
-                newItem);
-        }
-        catch (Exception ex)
-        {
-            return BadRequest($"Erreur lors de la création de l'objet : {ex.Message}");
-        }
+            var user = await _userService.GetById(reviewDTO.UserId);
+            if (user == null)
+            {
+                return NotFound($"User with {reviewDTO.UserId} not found");
+            }
+            var newReview = new Review
+            {
+                Comment = reviewDTO.Comment,
+                Rate = reviewDTO.Rate,
+                User = user
+            };
+                var newItem = await _reviewService.Create(newReview);
+                return CreatedAtAction(nameof(GetById),
+                    new { id = newItem.Id },
+                    newItem);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest($"Erreur lors de la création de l'objet : {ex.Message}");
+            }
     }
 
     [HttpPut("{id}")]
@@ -53,11 +73,23 @@ public class ReviewController(ReviewService service) : ControllerBase
     [ProducesResponseType(typeof(Review), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(string), StatusCodes.Status404NotFound)]
     [ProducesResponseType(typeof(string), StatusCodes.Status400BadRequest)]
-    public async Task<IActionResult> Update(int id, [FromBody] Review user)
+    public async Task<IActionResult> Update(int id, [FromBody] ReviewDTO reviewDTO)
     {
         try
         {
-            var updatedItem = await service.Update(id, user);
+            var user = await _userService.GetById(reviewDTO.UserId);
+            if (user == null)
+            {
+                return NotFound($"User with {reviewDTO.UserId} not found");
+            }
+            var newReview = new Review
+            {
+                Comment = reviewDTO.Comment,
+                Rate = reviewDTO.Rate,
+                User = user
+            };
+
+            var updatedItem = await _reviewService.Update(id, newReview);
             return Ok(updatedItem);
         }
         catch (KeyNotFoundException nex)
@@ -80,7 +112,7 @@ public class ReviewController(ReviewService service) : ControllerBase
     {
         try
         {
-            await service.Delete(id);
+            await _reviewService.Delete(id);
             return NoContent();
         }
         catch (KeyNotFoundException ex)

@@ -1,5 +1,7 @@
+using Co_Voyageur.Server.DTO;
 using Co_Voyageur.Server.Models;
 using Co_Voyageur.Server.Services;
+using Co_Voyageur.Server.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
 
@@ -7,14 +9,21 @@ namespace Co_Voyageur.Server.Controllers;
 
 [ApiController]
 [Route("api/step")]
-public class StepController(StepService service) : ControllerBase
+public class StepController : ControllerBase
 {
+    private readonly StepService _stepService;
+    private readonly TripService _tripService;
+    public StepController(StepService stepService, TripService tripService)
+    {
+        _stepService = stepService;
+        _tripService = tripService;
+    }
     [HttpGet("steps")]
         [SwaggerOperation(Summary = "Obtenir la liste des objets")]
         [ProducesResponseType(typeof(IEnumerable<Step>), StatusCodes.Status200OK)]
         public async Task<IActionResult> Get()
         {
-            var items = await service.GetAll();
+            var items = await _stepService.GetAll();
             return Ok(items);
         }
         
@@ -24,7 +33,7 @@ public class StepController(StepService service) : ControllerBase
         [ProducesResponseType(typeof(string), StatusCodes.Status404NotFound)]
         public async Task<IActionResult> GetById(int id)
         {
-            var item = await service.GetById(id);
+            var item = await _stepService.GetById(id);
             return item != null ? Ok(item) : NotFound($"objet avec l'id {id} non trouvé.");
         }
         
@@ -33,14 +42,21 @@ public class StepController(StepService service) : ControllerBase
         [SwaggerOperation(Summary = "Créer un nouvel objet")]
         [ProducesResponseType(typeof(Step), StatusCodes.Status201Created)]
         [ProducesResponseType(typeof(string), StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> Create([FromBody] Step item)
+        public async Task<IActionResult> Create([FromBody] StepDTO stepDTO)
         {
             try
             {
-                var newItem = await service.Create(item);
-                return CreatedAtAction(nameof(GetById), 
-                    new { id = newItem.Id }, 
-                    newItem);
+                var trip = await _tripService.GetById(stepDTO.TripId);
+                var newStep = new Step
+                {
+                    Position = stepDTO.Position,
+                    Date = stepDTO.Date,
+                    Trip = trip
+                };
+                var newItem = await _stepService.Create(newStep);
+                    return CreatedAtAction(nameof(GetById), 
+                        new { id = newItem.Id }, 
+                        newItem);
             }
             catch (Exception ex)
             {
@@ -54,13 +70,20 @@ public class StepController(StepService service) : ControllerBase
         [ProducesResponseType(typeof(Step), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(string), StatusCodes.Status404NotFound)]
         [ProducesResponseType(typeof(string), StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> Update(int id, [FromBody] Step user)
+        public async Task<IActionResult> Update(int id, [FromBody] StepDTO stepDTO)
         {
             try
             {
-                var updatedItem = await service.Update(id, user);
-                return Ok(updatedItem);
-            }
+                var trip = await _tripService.GetById(stepDTO.TripId);
+                var newStep = new Step
+                {
+                    Position = stepDTO.Position,
+                    Date = stepDTO.Date,
+                    Trip = trip
+                };
+                var updatedItem = await _stepService.Update(id, newStep);
+                    return Ok(updatedItem);
+                }
             catch (KeyNotFoundException nex)
             {
                 return NotFound(nex.Message);
@@ -81,7 +104,7 @@ public class StepController(StepService service) : ControllerBase
         {
             try
             {
-                await service.Delete(id);
+                await _stepService.Delete(id);
                 return NoContent();
             }
             catch (KeyNotFoundException ex)

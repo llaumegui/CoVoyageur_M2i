@@ -30,7 +30,7 @@ namespace Co_Voyageur.Server.Controllers
             return Ok(users);
         }
         
-        [HttpGet("{id}")]
+        [HttpGet("users/{id}")]
         [SwaggerOperation(Summary = "Obtenir un user par ID")]
         [ProducesResponseType(typeof(User), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(string), StatusCodes.Status404NotFound)]

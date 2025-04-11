@@ -36,16 +36,19 @@ builder.Services.AddScoped<IRepository<Trip,int>,TripRepository>();
 builder.Services.AddScoped<IUserService,UserService>();
 builder.Services.AddScoped<CarService>();
 builder.Services.AddScoped<ReviewService>();
-<<<<<<< HEAD
-builder.Services.AddScoped<IUserService, UserService>();
-=======
->>>>>>> 368dd10bd82a10b16ea347720e87a0e2b7727ea7
 builder.Services.AddScoped<StepService>();
 builder.Services.AddScoped<TripService>();
 
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 builder.Services.Configure<AppSettings>(builder.Configuration.GetSection("AppSettings"));
+
+builder.Services.AddControllers()
+    .AddJsonOptions(options =>
+    {
+        options.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.Preserve;
+        options.JsonSerializerOptions.MaxDepth = 32;  // Optionnel : augmenter la profondeur maximale
+    });
 
 var app = builder.Build();
 

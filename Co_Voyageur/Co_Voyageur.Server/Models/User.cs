@@ -29,5 +29,6 @@ namespace Co_Voyageur.Server.Models
         public List<Trip> Trips { get; set; } = [];
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
         public int? CreatedBy { get; set; }
+
     }
 }

@@ -1,5 +1,7 @@
+using Co_Voyageur.Server.DTO;
 using Co_Voyageur.Server.Models;
 using Co_Voyageur.Server.Services;
+using Co_Voyageur.Server.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
 
@@ -7,8 +9,16 @@ namespace Co_Voyageur.Server.Controllers;
 
 [ApiController]
 [Route("api/car")]
-public class CarController(CarService service) : ControllerBase
+public class CarController : ControllerBase
 {
+    private readonly IUserService _userService;
+    private readonly CarService service;
+    public CarController(CarService carService, IUserService userService)
+    {
+        _userService = userService;
+        service = carService;
+    }
+
     [HttpGet("cars")]
         [SwaggerOperation(Summary = "Obtenir la liste des objets")]
         [ProducesResponseType(typeof(IEnumerable<Car>), StatusCodes.Status200OK)]
@@ -33,11 +43,23 @@ public class CarController(CarService service) : ControllerBase
         [SwaggerOperation(Summary = "Créer un nouvel objet")]
         [ProducesResponseType(typeof(Car), StatusCodes.Status201Created)]
         [ProducesResponseType(typeof(string), StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> Create([FromBody] Car item)
+        public async Task<IActionResult> Create([FromBody] CarDTO carDTO)
         {
             try
             {
-                var newItem = await service.Create(item);
+                var user = await _userService.GetById(carDTO.UserId);
+            if (user == null) {
+                return NotFound($"User with {carDTO.UserId} not found");
+            }
+            var newCar = new Car
+            {
+                Model = carDTO.Model,
+                PassengerSize = carDTO.PassengerSize,
+                Color = carDTO.Color,
+                Plate = carDTO.Plate,
+                User = user
+            };
+            var newItem = await service.Create(newCar);
                 return CreatedAtAction(nameof(GetById), 
                     new { id = newItem.Id }, 
                     newItem);
@@ -54,11 +76,25 @@ public class CarController(CarService service) : ControllerBase
         [ProducesResponseType(typeof(Car), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(string), StatusCodes.Status404NotFound)]
         [ProducesResponseType(typeof(string), StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> Update(int id, [FromBody] Car user)
+        public async Task<IActionResult> Update(int id, [FromBody] CarDTO carDTO)
         {
             try
             {
-                var updatedItem = await service.Update(id, user);
+
+                var user = await _userService.GetById(carDTO.UserId);
+                if (user == null)
+                {
+                    return NotFound($"User with {carDTO.UserId} not found");
+                }
+                var newCar = new Car
+                {
+                    Model = carDTO.Model,
+                    PassengerSize = carDTO.PassengerSize,
+                    Color = carDTO.Color,
+                    Plate = carDTO.Plate,
+                    User = user
+                };
+                var updatedItem = await service.Update(id, newCar);
                 return Ok(updatedItem);
             }
             catch (KeyNotFoundException nex)
