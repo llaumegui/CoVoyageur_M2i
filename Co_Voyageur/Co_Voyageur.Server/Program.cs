@@ -35,7 +35,7 @@ builder.Services.AddScoped<IRepository<Trip,int>,TripRepository>();
 
 builder.Services.AddScoped<CarService>();
 builder.Services.AddScoped<ReviewService>();
-builder.Services.AddScoped<UserService>();
+builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<StepService>();
 builder.Services.AddScoped<TripService>();
 
