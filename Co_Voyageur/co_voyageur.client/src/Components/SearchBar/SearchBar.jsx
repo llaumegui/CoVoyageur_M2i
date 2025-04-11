@@ -1,14 +1,15 @@
 import React from 'react';
+import './SearchBar.css';
 const SearchBar = () => {
     return (
         <>
-        <section className="section-search">
-            <div className="search-bar-container">
-                <input type="text" placeholder="Départ" className="search-bar-from" />
-                <input type="text" placeholder="Arrivée" className="search-bar-to" />
-                <input type="date" className="search-bar-date" />
-                <input type="number" placeholder="Nombre de passagers" className="search-bar-passengers" min="1" max="8" />
-                <button className="search-bar-button">Rechercher</button>
+        <section className="search">
+            <div className="search__container">
+                <input type="text" placeholder="Départ" className="search__container-input"/>
+                <input type="text" placeholder="Arrivée" className="search__container-input"/>
+                <input type="date" className="search__container-input" />
+                <input type="number" placeholder="Nombre de passagers" min="1" max="8" className="search__container-input" />
+                <button>Rechercher</button>
             </div>
         </section>
         </>

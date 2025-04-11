@@ -1,0 +1,26 @@
+.search{
+    display: flex;
+    position: relative;
+    bottom: 3rem;
+    justify-content: center;
+    align-items: center;
+}
+
+.search__container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    background: rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(5px);
+    border-radius: 1rem;
+}
+
+.search__container-input{
+    padding: 1rem;
+    border-radius: 0.5rem;
+    font-size:medium;
+    border: none;
+}

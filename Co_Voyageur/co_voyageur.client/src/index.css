@@ -33,3 +33,24 @@ a:hover{
   text-decoration: underline;
   font-size: larger;
 }
+
+button{
+  font-size: large;
+  background-color: var(--button-color);
+  color: var(--white-text);
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  border: none;
+  cursor: pointer;
+  transition: var(--general-transition);
+}
+
+button:hover{
+  background-color: var(--button-hover-color);
+  transform: scale(1.05);
+}
+
+.hero{
+width: 100%;
+height: 250px;
+}
