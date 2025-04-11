@@ -2,12 +2,14 @@
 
 :root{
   --background-nav: #3C6E71;
+  --border-card-color: #3C6E71;
   --white-text:#FAFAFA;
   --body-background-color:#FAFAFA;
   --button-color: #284B63;
   --button-hover-color: #3D7398;
   --font-color: #353535;
   --button-update-color: #C60B0B;
+  --button-update-hover-color: #8a0808;
   --error-color: #ff0000;
   --font-site: "Poppins", sans-serif;
   --background-image-signup: url('../public/Images/backgroundSignIn.png');
@@ -80,6 +82,13 @@ h1{
   color: var(--white-text);
   text-align: center;
   margin: 0;
+}
+
+h2{
+  font-size: 1.5rem;
+  color: var(--font-color);
+  text-align: center;
+  margin: 2rem;
 }
 
 .error{

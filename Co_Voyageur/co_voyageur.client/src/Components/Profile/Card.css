@@ -1,0 +1,38 @@
+.card{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 30%;
+    border-radius: 10px;
+    border: 0.2rem solid var(--border-card-color);
+    overflow: hidden;
+    padding: 1rem;
+}
+
+.card-large{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 50%;
+    border-radius: 10px;
+    border: 0.2rem solid var(--border-card-color);
+    overflow: hidden;
+    padding: 1rem;
+}
+
+.card__header, .card-large__header{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.card__footer-button-edit, .card-large__footer-button-edit{
+    background-color: var(--button-update-hover-color);
+}
+
+.card__footer-button-edit:hover, .card-large__footer-button-edit:hover{
+    background-color: var(--button-update-color);
+}
