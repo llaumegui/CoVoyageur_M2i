@@ -33,9 +33,9 @@ builder.Services.AddScoped<IRepository<User,int>,UserRepository>();
 builder.Services.AddScoped<IRepository<Step,int>,StepRepository>();
 builder.Services.AddScoped<IRepository<Trip,int>,TripRepository>();
 
+builder.Services.AddScoped<IUserService,UserService>();
 builder.Services.AddScoped<CarService>();
 builder.Services.AddScoped<ReviewService>();
-builder.Services.AddScoped<UserService>();
 builder.Services.AddScoped<StepService>();
 builder.Services.AddScoped<TripService>();
 
@@ -61,6 +61,11 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseCors(options =>
+{
+    options.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
+});
 
 app.UseAuthorization();
 
