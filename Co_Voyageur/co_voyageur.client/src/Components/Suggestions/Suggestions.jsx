@@ -1,5 +1,6 @@
 import React from 'react';
 import SuggestionsJSON from './Suggestions.json';
+import './Suggestions.css';
 const Suggestions = () => {
         let maxSuggestions = 6;
         let suggestions =0;
@@ -19,13 +20,14 @@ const Suggestions = () => {
         }
         
         return (
-            <div className="suggestions-container">
-                <h2 className="suggestions-title">Suggestions : </h2>
+            <div className="suggestion">
+                <h2 className="suggestion__title">Suggestions : </h2>
                 {tabOfCountrys.map((country, index) => (    
-                    <button key={index} className="suggestion-item">
+                    <button key={index} className="suggestion__item">
                         {country}
                     </button>
                 ))}
+                <p>Vous pouvez cliquer sur une suggestion afin de compléter le formulaire automatiquement.</p>
             </div>
         );
 };
