@@ -1,0 +1,34 @@
+.navbar{
+    background-color: var(--background-nav);
+    color: var(--white-text);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem;
+}
+
+.navbar__right{
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+
+.navbar__account{
+    display: flex;
+    align-items: center;
+    transition: var(--general-transition);
+}
+
+.navbar__account:hover{
+    scale: 1.1;
+    cursor: pointer;
+}
+
+.navbar__logo{
+    transition: var(--general-transition);
+    cursor: pointer;
+}
+
+.navbar__logo:hover{
+    scale: 1.05;
+}

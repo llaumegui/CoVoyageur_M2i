@@ -3,6 +3,7 @@
 :root{
   --background-nav: #3C6E71;
   --white-text:#FAFAFA;
+  --body-background-color:#FAFAFA;
   --button-color: #284B63;
   --button-hover-color: #3D7398;
   --font-color: #353535;
@@ -11,4 +12,24 @@
   --background-image-signup: url('D:\Projet\CoVoyageur_M2i\Co_Voyageur\co_voyageur.client\public\Images\backgroundSignIn.png');
   --background-image-login: url('D:\Projet\CoVoyageur_M2i\Co_Voyageur\co_voyageur.client\public\Images\backgroundLogIn.png');
   --background-image-travel: url('D:\Projet\CoVoyageur_M2i\Co_Voyageur\co_voyageur.client\public\Images\backgroundSubmitTravel.jpg');
+  --general-transition: all 0.3s ease-in-out;
+}
+
+body,html{
+  margin: 0;
+  font-family: var(--font-site);
+  background-color: var(--body-background-color);
+}
+
+a{
+  font-size: large;
+  text-decoration: none;
+  color: var(--white-text);
+  transition: var(--general-transition);
+}
+
+
+a:hover{
+  text-decoration: underline;
+  font-size: larger;
 }
