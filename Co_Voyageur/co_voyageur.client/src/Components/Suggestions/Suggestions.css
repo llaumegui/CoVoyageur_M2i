@@ -10,7 +10,7 @@
 .suggestion-item{
     border: 0.2rem solid var(--background-nav);
     background: none;
-    width: 20%;
+    min-width: 250px;
     font-size: 1.2rem;
     border-radius: 0.5rem;
     cursor: pointer;

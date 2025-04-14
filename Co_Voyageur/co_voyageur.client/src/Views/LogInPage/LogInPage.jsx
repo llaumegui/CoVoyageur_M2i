@@ -1,5 +1,6 @@
 import React from 'react';
 import NavBar from '../../Components/NavBar/NavBar';
+import Footer from '../../components/Footer/Footer';
 import './LogInPage.css';
 const LogInPage = () => {
     return (
@@ -14,6 +15,7 @@ const LogInPage = () => {
                     <a href='/signup'>Pas encore de compte? Inscrivez vous!</a>
                 </form>
             </section>
+            <Footer />
         </>
     );
 };

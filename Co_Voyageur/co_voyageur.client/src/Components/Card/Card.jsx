@@ -1,11 +1,11 @@
 import './Card.css';
 
-const Card = () => {
+const Card = ({title, description}) => {
     return (
         <>
             <div className="card">
-                <h3 className="card-title">About</h3>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi porro nemo debitis nulla unde quam tenetur omnis perspiciatis quae facilis, laudantium quis consequatur labore hic pariatur minima suscipit sit facere.</p>
+                <h3 className="card-title">{title}</h3>
+                <p>{description}</p>
             </div>
         </>
     )

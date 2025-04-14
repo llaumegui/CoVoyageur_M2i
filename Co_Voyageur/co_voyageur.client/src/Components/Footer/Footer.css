@@ -9,3 +9,9 @@ footer a {
     justify-content: center;
     align-items: center;
 }
+
+footer {
+    position: fixed;
+    left: 50%;
+    bottom: 0px;
+}

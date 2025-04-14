@@ -21,7 +21,6 @@ const Suggestions = () => {
         
         return (
             <div className="suggestions-container">
-                <h2 className="suggestions-title">Suggestions : </h2>
                 {tabOfCountrys.map((country, index) => (    
                     <button key={index} className="suggestion-item">
                         {country}

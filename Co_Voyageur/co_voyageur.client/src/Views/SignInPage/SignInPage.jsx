@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import NavBar from '../../Components/NavBar/NavBar';
+import Footer from '../../components/Footer/Footer';
 import './SignInPage.css';
 const LogInPage = () => {
     const [error, setError] = useState('');
@@ -57,6 +58,7 @@ const LogInPage = () => {
                     <a href='/login'>Déjà incrit? Connectez vous!</a>
                 </form>
             </section>
+            <Footer />
         </>
     );
 };
