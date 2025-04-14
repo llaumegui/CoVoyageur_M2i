@@ -8,7 +8,7 @@ const HomePage = () => {
     return (
         <>
             <NavBar ></NavBar>
-            <img src="\Images\CoVoyagerImageBackground01.jpg" alt="ImageBackground" className="hero"/>
+            <img src="\Images\CoVoyagerImageBackground01.webp" alt="ImageBackground" className="hero"/>
             <SearchBar></SearchBar>
             <About />
         </>

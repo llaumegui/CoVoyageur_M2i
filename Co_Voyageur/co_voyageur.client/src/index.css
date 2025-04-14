@@ -12,9 +12,9 @@
   --button-update-hover-color: #8a0808;
   --error-color: #ff0000;
   --font-site: "Poppins", sans-serif;
-  --background-image-signup: url('../public/Images/backgroundSignIn.png');
-  --background-image-login: url('../public/Images/backgroundLogIn.png');
-  --background-image-travel: url('../public/Images/backgroundSubmitTravel.jpg');
+  --background-image-signup: url('../public/Images/backgroundSignIn.webp');
+  --background-image-login: url('../public/Images/backgroundLogIn.webp');
+  --background-image-travel: url('../public/Images/backgroundSubmitTravel.webp');
   --general-transition: all 0.3s ease-in-out;
 }
 

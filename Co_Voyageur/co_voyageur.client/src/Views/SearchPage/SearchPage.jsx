@@ -6,7 +6,7 @@ const SearchPage = () => {
     return (
         <>
             <NavBar></NavBar>
-            <img src="\Images\CoVoyagerImageBackground03.jpg" alt="ImageHero" className="hero"/>
+            <img src="\Images\CoVoyagerImageBackground03.webp" alt="ImageHero" className="hero"/>
             <SearchBar></SearchBar>
             <div>
             <Suggestions/>
