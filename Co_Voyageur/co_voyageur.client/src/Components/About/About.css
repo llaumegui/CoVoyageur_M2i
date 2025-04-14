@@ -1,0 +1,29 @@
+li {
+    list-style-type: none;
+}
+
+section {
+   padding: 5rem;
+   line-height: 2rem;
+   text-align: justify; 
+}
+
+.title {
+    font-size: 2rem;
+    color: var(--background-nav);
+}
+
+hr {
+    margin: 4rem auto;
+    width: 50%;
+    height: 3px;
+    background-color: var(--font-color);
+    border: none;
+    border-radius: 1rem;
+}
+
+.inscription {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

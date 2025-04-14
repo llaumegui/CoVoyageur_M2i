@@ -1,6 +1,7 @@
 import React from 'react';
 import NavBar from '../../Components/NavBar/NavBar';
 import SearchBar from '../../Components/SearchBar/SearchBar';
+import About from '../../Components/About/About';
 
 const HomePage = () => {
     
@@ -9,6 +10,7 @@ const HomePage = () => {
             <NavBar ></NavBar>
             <img src="\Images\CoVoyagerImageBackground01.jpg" alt="ImageBackground" className="hero"/>
             <SearchBar></SearchBar>
+            <About />
         </>
     );
 };
