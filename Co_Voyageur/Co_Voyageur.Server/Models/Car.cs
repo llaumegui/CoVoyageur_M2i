@@ -22,7 +22,7 @@ namespace Co_Voyageur.Server.Models
         [Column("plate")]
         [Required]
         public string Plate { get; set; }
-
+        public int UserId { get; set; }
         public User User { get; set; }
 
     }
