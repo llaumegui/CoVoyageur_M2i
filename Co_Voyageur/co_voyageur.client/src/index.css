@@ -31,7 +31,6 @@ a{
   transition: var(--general-transition);
 }
 
-
 a:hover{
   text-decoration: underline;
   font-size: larger;
@@ -111,6 +110,17 @@ h2{
   display: none;
 }
 
+
+.filter{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  width: 15%;
+  padding: 2rem;
+  border: 0.2rem solid var(--border-card-color);
+  border-radius: 1rem;
+}
 @media screen and (max-width: 768px) {
   .hero{
     height: 150px;
@@ -164,4 +174,13 @@ h2{
   .suggestion__item{
     width: 80%;
   }
+  
+  .filter{
+    width: 100%;
+    border: none;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 0;
+  }
+  
 }

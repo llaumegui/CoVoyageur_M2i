@@ -8,8 +8,10 @@ const SearchTravelsPage = () => {
         <NavBar></NavBar>
         <img src="\Images\CoVoyagerImageBackground02.jpg" alt="ImageBackground" className="hero" />
         <SearchBar/>
+        <section className='bento'>
         <Filters></Filters>
-
+        {/*Ajouter ici le composant une fois la recherche effectuée*/}
+        </section>
         </>
     );
 };
