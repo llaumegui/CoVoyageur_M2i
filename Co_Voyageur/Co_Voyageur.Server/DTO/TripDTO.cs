@@ -11,7 +11,7 @@ namespace Co_Voyageur.Server.DTO
 
         public double Price { get; set; }
 
-        public List<Step> Steps { get; set; } = [];
-        public List<User> Users { get; set; } = [];
+        public List<StepDTO> Steps { get; set; } = [];
+        public List<int> UsersId { get; set; } = [];
     }
 }

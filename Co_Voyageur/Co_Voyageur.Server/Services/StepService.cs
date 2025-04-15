@@ -30,10 +30,13 @@ public class StepService : IService<Step, int>
         var oldItem = await _repository.GetById(id);
         if (oldItem == null)
             return null;
-        
-        if(oldItem.Position!=item.Position)
-            oldItem.Position = item.Position;
-        if(oldItem.Date != item.Date)
+
+        if (oldItem.Departure!=item.Departure)
+            oldItem.Departure = item.Departure;
+
+        if (oldItem.Arrival != item.Arrival)
+            oldItem.Arrival = item.Arrival;
+        if (oldItem.Date != item.Date)
             oldItem.Date = item.Date;
         if(oldItem.Trip!=item.Trip)
             oldItem.Trip = item.Trip;

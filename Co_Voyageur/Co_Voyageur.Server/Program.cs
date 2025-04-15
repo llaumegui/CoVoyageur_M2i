@@ -38,6 +38,7 @@ builder.Services.AddScoped<CarService>();
 builder.Services.AddScoped<ReviewService>();
 builder.Services.AddScoped<StepService>();
 builder.Services.AddScoped<TripService>();
+builder.Services.AddScoped<UserService>();
 
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 

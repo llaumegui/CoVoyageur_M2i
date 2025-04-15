@@ -8,6 +8,7 @@ namespace Co_Voyageur.Server.Models
         public string? Comment { get; set; }
         [Required]
         public int Rate {  get; set; }
+        public int UserId { get; set; }
         public User? User { get; set; }
 
     }

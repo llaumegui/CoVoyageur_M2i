@@ -1,5 +1,7 @@
+using Co_Voyageur.Server.DTO;
 using Co_Voyageur.Server.Models;
 using Co_Voyageur.Server.Services;
+using Co_Voyageur.Server.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
 
@@ -10,10 +12,12 @@ namespace Co_Voyageur.Server.Controllers;
 public class TripController : ControllerBase
 {
     private readonly TripService _tripService;
+    private readonly UserService _userService;
 
-    public TripController(TripService tripService)
+    public TripController(TripService tripService, UserService userService)
     {
         _tripService = tripService;
+        _userService = userService;
     }
 
     [HttpGet("trips")]
@@ -39,11 +43,29 @@ public class TripController : ControllerBase
     [SwaggerOperation(Summary = "Créer un nouvel objet")]
     [ProducesResponseType(typeof(Trip), StatusCodes.Status201Created)]
     [ProducesResponseType(typeof(string), StatusCodes.Status400BadRequest)]
-    public async Task<IActionResult> Create([FromBody] Trip item)
+    public async Task<IActionResult> Create([FromBody] TripDTO tripDTO)
     {
         try
         {
-            var newItem = await _tripService.Create(item);
+            var driver = await _userService.GetById(tripDTO.DriverId);
+            if (driver == null)
+            {
+                return NotFound($"driver with {tripDTO.DriverId} not found");
+            }
+            var steps = tripDTO.Steps.Select(s => new Step
+            {
+                Departure = s.Departure,
+                Arrival = s.Arrival,
+                Date = s.Date
+            }).ToList();
+
+            var newTrip = new Trip
+            {
+                Driver = driver,
+                Price = tripDTO.Price,
+                Steps = steps
+            };
+            var newItem = await _tripService.Create(newTrip);
             return CreatedAtAction(nameof(GetById),
                 new { id = newItem.Id },
                 newItem);
@@ -52,6 +74,17 @@ public class TripController : ControllerBase
         {
             return BadRequest($"Erreur lors de la création de l'objet : {ex.Message}");
         }
+        //try
+        //{
+        //    var newItem = await _tripService.Create(item);
+        //    return CreatedAtAction(nameof(GetById),
+        //        new { id = newItem.Id },
+        //        newItem);
+        //}
+        //catch (Exception ex)
+        //{
+        //    return BadRequest($"Erreur lors de la création de l'objet : {ex.Message}");
+        //}
     }
 
     [HttpPut("{id}")]

@@ -6,8 +6,9 @@ namespace Co_Voyageur.Server.Models
     public class Trip
     {
         public int Id { get; set; }
-        [Required]
         public int DriverId { get; set; }
+        [Required]
+        public User Driver { get; set; }
         [Required]
         public double Price { get; set; }
         [Required]

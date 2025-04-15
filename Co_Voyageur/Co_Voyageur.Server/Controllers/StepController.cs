@@ -46,10 +46,11 @@ public class StepController : ControllerBase
         {
             try
             {
-                var trip = await _tripService.GetById(stepDTO.TripId);
+                var trip = await _tripService.GetById(stepDTO.Id);
                 var newStep = new Step
                 {
-                    Position = stepDTO.Position,
+                    Departure = stepDTO.Departure,
+                    Arrival = stepDTO.Arrival,
                     Date = stepDTO.Date,
                     Trip = trip
                 };
@@ -74,10 +75,11 @@ public class StepController : ControllerBase
         {
             try
             {
-                var trip = await _tripService.GetById(stepDTO.TripId);
+                var trip = await _tripService.GetById(stepDTO.Id);
                 var newStep = new Step
                 {
-                    Position = stepDTO.Position,
+                    Departure = stepDTO.Departure,
+                    Arrival = stepDTO.Arrival,
                     Date = stepDTO.Date,
                     Trip = trip
                 };
