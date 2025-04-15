@@ -1,5 +1,7 @@
 import React from 'react';
 import '../Card.css';
+
+
 const User = () => {
     const user = {
         firstname: 'John',
@@ -8,6 +10,8 @@ const User = () => {
         password: 'password123',
         phone: '1234567890',
     }
+
+    
     return (
         <div className='card-large'>
             <div className='card-large__header'>
