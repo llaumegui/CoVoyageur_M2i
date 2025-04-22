@@ -8,6 +8,19 @@
     gap: 2rem;
 }
 
-.suggestion__item{
-    width: 20%;
+.suggestion-item{
+    border: 0.2rem solid var(--background-nav);
+    background: none;
+    min-width: 250px;
+    font-size: 1.2rem;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    height: 2.5rem;
+    transition: all 0.3s ease;
+}
+
+.suggestion-item:hover{
+    background-color: var(--background-nav);
+    color: var(--white-text);
+    scale: 1.05;
 }

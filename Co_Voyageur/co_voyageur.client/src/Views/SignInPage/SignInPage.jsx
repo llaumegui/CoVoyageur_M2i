@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
-import NavBar from '../../Components/NavBar/NavBar';
+import NavBar from '../../Components/NavBar';
+import Footer from '../../components/Footer/Footer';
 import './SignInPage.css';
 const SignInPage = () => {
     const [error, setError] = useState('');
@@ -70,10 +71,10 @@ const SignInPage = () => {
                         </>
                     }                  
                 </form>
-                {error && <p className='error'>{error}</p>}
-        </section>
-    </>
-        )
-    };
+            </section>
+            <Footer />
+        </>
+    );
+};
 
 export default SignInPage;

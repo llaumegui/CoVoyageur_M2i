@@ -20,8 +20,7 @@ const Suggestions = () => {
         }
         
         return (
-            <div className="suggestion">
-                <h2 className="suggestion__title">Suggestions : </h2>
+            <div className="suggestions-container">
                 {tabOfCountrys.map((country, index) => (    
                     <button key={index} className="suggestion__item">
                         {country}

@@ -1,0 +1,13 @@
+.background-image-home{
+    width: 100%;
+    height: auto;
+}
+
+.home-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: flex-start;
+    gap: 30px;
+    margin-top: 50px;
+}

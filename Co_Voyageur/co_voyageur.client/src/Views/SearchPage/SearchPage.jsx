@@ -1,17 +1,17 @@
 import React from 'react';
 import SearchBar from '../../Components/SearchBar/SearchBar.jsx';
-import NavBar from '../../Components/NavBar/NavBar.jsx';
-import Suggestions from '../../Components/Suggestions/Suggestions.jsx';
+import './SearchPage.css';
+import Suggestions from '../../components/Suggestions/Suggestions.jsx';
 const SearchPage = () => {
     return (
         <>
             <NavBar></NavBar>
             <img src="\Images\CoVoyagerImageBackground03.webp" alt="ImageHero" className="hero"/>
             <SearchBar></SearchBar>
-            <div>
+            <div className="container">
+            <h2 className="suggestions-title">Suggestions : </h2>
             <Suggestions/>
             </div>
-
         </>
     );
 };
