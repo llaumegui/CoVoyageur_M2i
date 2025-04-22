@@ -1,7 +1,7 @@
 import { React, useState } from 'react';
 import NavBar from '../../components/NavBar/NavBar';
 import './HomePage.css';
-import SearchBar from '../../Components/SearchBar';
+import SearchBar from '../../Components/SearchBar/SearchBar';
 import Card from '../../components/Card/Card';
 import Suggestions from '../../components/Suggestions/Suggestions';
 import Footer from '../../components/Footer/Footer';

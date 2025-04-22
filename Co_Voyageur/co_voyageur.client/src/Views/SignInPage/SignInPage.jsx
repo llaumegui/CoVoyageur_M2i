@@ -1,5 +1,4 @@
 import React, {useState} from 'react';
-import NavBar from '../../Components/NavBar';
 import Footer from '../../components/Footer/Footer';
 import './SignInPage.css';
 const SignInPage = () => {
