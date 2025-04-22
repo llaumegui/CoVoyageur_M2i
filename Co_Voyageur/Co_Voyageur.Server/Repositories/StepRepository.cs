@@ -22,7 +22,7 @@ namespace Co_Voyageur.Server.Repositories
         }
         public async Task<Step?> GetById(int id)
         {
-            return await _appDbContext.Steps.FindAsync(id);
+            return await _appDbContext.Steps.Include(c => c.Trip).FirstOrDefaultAsync(c => c.Id == id);
         }
         public async Task<Step?> GetByPredicate(Expression<Func<Step, bool>> predicate)
         {
@@ -30,7 +30,7 @@ namespace Co_Voyageur.Server.Repositories
         }
         public Task<IEnumerable<Step>> GetAll()
         {
-            return Task.FromResult<IEnumerable<Step>>(_appDbContext.Steps);
+            return Task.FromResult<IEnumerable<Step>>(_appDbContext.Steps.Include(c=> c.Trip));
         }
         public async Task<Step?> Update(Step item)
         {

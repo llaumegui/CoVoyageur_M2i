@@ -22,7 +22,7 @@ namespace Co_Voyageur.Server.Repositories
         }
         public async Task<Trip?> GetById(int id)
         {
-            return await _appDbContext.Trips.FindAsync(id);
+            return await _appDbContext.Trips.Include(c => c.Driver).Include(c => c.Users).Include(c => c.Steps).FirstOrDefaultAsync(c => c.Id == id);
         }
         public async Task<Trip?> GetByPredicate(Expression<Func<Trip, bool>> predicate)
         {
@@ -30,7 +30,7 @@ namespace Co_Voyageur.Server.Repositories
         }
         public Task<IEnumerable<Trip>> GetAll()
         {
-            return Task.FromResult<IEnumerable<Trip>>(_appDbContext.Trips);
+            return Task.FromResult<IEnumerable<Trip>>(_appDbContext.Trips.Include(c => c.Driver).Include(c => c.Users).Include(c => c.Steps));
         }
         public async Task<Trip?> Update(Trip item)
         {

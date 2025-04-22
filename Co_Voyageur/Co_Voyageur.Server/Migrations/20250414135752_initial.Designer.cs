@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Co_Voyageur.Server.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250410140256_Initial")]
-    partial class Initial
+    [Migration("20250414135752_initial")]
+    partial class initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -76,7 +76,7 @@ namespace Co_Voyageur.Server.Migrations
                     b.Property<int>("Rate")
                         .HasColumnType("int");
 
-                    b.Property<int?>("UserId")
+                    b.Property<int>("UserId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -94,10 +94,14 @@ namespace Co_Voyageur.Server.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<string>("Arrival")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("Position")
+                    b.Property<string>("Departure")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -126,6 +130,8 @@ namespace Co_Voyageur.Server.Migrations
                         .HasColumnType("float");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("DriverId");
 
                     b.ToTable("Trips");
                 });
@@ -181,7 +187,7 @@ namespace Co_Voyageur.Server.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedAt = new DateTime(2025, 4, 10, 14, 2, 56, 335, DateTimeKind.Utc).AddTicks(4126),
+                            CreatedAt = new DateTime(2025, 4, 14, 13, 57, 51, 768, DateTimeKind.Utc).AddTicks(906),
                             Email = "Admin.Root@gmail.com",
                             FirstName = "Mister",
                             IsAdmin = true,
@@ -193,7 +199,7 @@ namespace Co_Voyageur.Server.Migrations
                         new
                         {
                             Id = 2,
-                            CreatedAt = new DateTime(2025, 4, 10, 14, 2, 56, 335, DateTimeKind.Utc).AddTicks(5434),
+                            CreatedAt = new DateTime(2025, 4, 14, 13, 57, 51, 768, DateTimeKind.Utc).AddTicks(1805),
                             Email = "John.Doe@gmail.com",
                             FirstName = "John",
                             IsAdmin = false,
@@ -234,7 +240,9 @@ namespace Co_Voyageur.Server.Migrations
                 {
                     b.HasOne("Co_Voyageur.Server.Models.User", "User")
                         .WithMany("Reviews")
-                        .HasForeignKey("UserId");
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("User");
                 });
@@ -248,6 +256,17 @@ namespace Co_Voyageur.Server.Migrations
                         .IsRequired();
 
                     b.Navigation("Trip");
+                });
+
+            modelBuilder.Entity("Co_Voyageur.Server.Models.Trip", b =>
+                {
+                    b.HasOne("Co_Voyageur.Server.Models.User", "Driver")
+                        .WithMany()
+                        .HasForeignKey("DriverId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Driver");
                 });
 
             modelBuilder.Entity("TripUser", b =>

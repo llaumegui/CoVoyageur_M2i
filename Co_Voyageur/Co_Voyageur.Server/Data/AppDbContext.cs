@@ -18,6 +18,11 @@ namespace Co_Voyageur.Server.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<User>().HasData(InitialData.users);
+            modelBuilder.Entity<Trip>()
+           .HasOne(t => t.Driver)
+           .WithMany()
+           .HasForeignKey(t => t.DriverId)
+           .OnDelete(DeleteBehavior.Restrict);
             /*
             modelBuilder.Entity<Car>().HasData(InitialData.cars);
             modelBuilder.Entity<Review>().HasData(InitialData.reviews);

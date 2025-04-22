@@ -23,7 +23,13 @@ namespace Co_Voyageur.Server.Repositories
         }
         public async Task<User?> GetById(int id)
         {
-            return await _appDbContext.Users.FindAsync(id);
+            return await _appDbContext.Users
+        .Include(u => u.Trips)
+            .ThenInclude(t => t.Steps)
+        .Include(u => u.Trips)
+            .ThenInclude(t => t.Users) // les passagers
+        .Include(u => u.Reviews)
+        .FirstOrDefaultAsync(u => u.Id == id);
         }
         public async Task<User?> GetByPredicate(Expression<Func<User, bool>> predicate)
         {
@@ -31,7 +37,11 @@ namespace Co_Voyageur.Server.Repositories
         }
         public Task<IEnumerable<User>> GetAll()
         {
-            return Task.FromResult<IEnumerable<User>>(_appDbContext.Users);
+            return Task.FromResult<IEnumerable<User>>(_appDbContext.Users.Include(u => u.Trips)
+            .ThenInclude(t => t.Steps)
+        .Include(u => u.Trips)
+            .ThenInclude(t => t.Users) // les passagers
+        .Include(u => u.Reviews));
         }
         public async Task<User?> Update(User item)
         {

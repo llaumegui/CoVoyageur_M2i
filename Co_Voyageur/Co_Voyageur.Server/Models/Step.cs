@@ -7,10 +7,13 @@ namespace Co_Voyageur.Server.Models
     {
         public int Id { get; set; }
         [Required]
-        public string Position { get; set; }
+        public string Departure { get; set; }
+        [Required]
+        public string Arrival { get; set; }
         [Required]
         public DateTime Date { get; set; }
         [Required]
+        public int TripId { get; set; }
         public Trip Trip { get; set; }
 
 

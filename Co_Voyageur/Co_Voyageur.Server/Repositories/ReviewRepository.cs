@@ -22,7 +22,7 @@ namespace Co_Voyageur.Server.Repositories
         }
         public async Task<Review?> GetById(int id)
         {
-            return await _appDbContext.Reviews.FindAsync(id);
+            return await _appDbContext.Reviews.Include(c => c.User).FirstOrDefaultAsync(c => c.Id == id);
         }
         public async Task<Review?> GetByPredicate(Expression<Func<Review, bool>> predicate)
         {
@@ -30,7 +30,7 @@ namespace Co_Voyageur.Server.Repositories
         }
         public Task<IEnumerable<Review>> GetAll()
         {
-            return Task.FromResult<IEnumerable<Review>>(_appDbContext.Reviews);
+            return Task.FromResult<IEnumerable<Review>>(_appDbContext.Reviews.Include(c => c.User));
         }
         public async Task<Review?> Update(Review item)
         {
